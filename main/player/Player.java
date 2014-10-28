@@ -1,8 +1,10 @@
 package player;
 
 import checkersMain.Square;
+import checkersMain.Location;
 
-public abstract class Player {
+public class Player//basically abstract, but not.
+{
 	private char player;
 	private String playerName;
 	
@@ -11,21 +13,147 @@ public abstract class Player {
 	
 	
 	
-	public char getPlayer() {
+	public char getPlayer()
+    {
 		return player;
 	}
-	public void setPlayer(char player) {
+	public void setPlayer(char player)
+    {
 		this.player = player;
 	}
-	public String getPlayerName() {
+	public String getPlayerName()
+    {
 		return playerName;
 	}
-	public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerName)
+    {
 		this.playerName = playerName;
 	}
+
+
+
+    //returns location array of all pieces on the board.
+	public Location[] getPieces(Square[][] board)
+    {
+        Location[] pieces = new Location[12];
+        int count = 0;
+        for(int x = 0; x < 8; x++)
+        {
+            for(int y = 0; y < 8; y++)
+            {
+                if(board[x][y].getPiece() == player)
+                {
+                    pieces[count] = new Location(x, y);
+                    count++;
+                }
+            }
+        }
+
+
+        Location[] trRet = new Location[count];
+
+        for(int x = 0; x < count; x++)
+        {
+            trRet[x] = pieces[x];
+        }
+        return trRet;
+
+    }
+
+
+
 	
 	
-	
-	
-	public abstract Square[] move(Square[] board);
+	public Square[][] move(Square[][] board)
+    {
+        return board; //you'd better override this method.
+    }
+
+
+    private Square[][] delete(int one, int two, Square[][] board)// replaces coordinates piece on
+    // theBoard with ' '
+    {
+        Square[][] theBoard = new Square[8][8];
+        theBoard[one][two] = new Square();
+        return theBoard;
+    }
+
+    private Square[][] teleport(Location from, Location to, Square[][] board)// Removes a piece from one
+    // place to other
+    {
+        Square[][] theBoard = new Square[8][8];
+        theBoard[to.getX()][to.getY()] = theBoard[from.getX()][from.getY()];
+        theBoard = delete(from.getX(), from.getY(), theBoard);
+        return theBoard;
+    }
+
+    private Square[][] deleteBetween(Location first, Location second, Square[][] board)// deletes all
+    // the squares
+    // in a diagonal
+    // between any
+    // two square.
+    {
+        Square[][] theBoard = board;
+        int dirX = first.getX() - second.getX();
+        int dirY = first.getY() - second.getY();
+        dirX = dirX / Math.abs(dirX);
+        dirY = dirY / Math.abs(dirY);
+        for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++)
+        {
+            theBoard = delete(first.getX() - dirX * x, first.getY() - dirY * x, theBoard);
+        }
+        return theBoard;
+    }
+
+
+
+
+
+    private Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
+    // deletes middle, and
+    // teleports
+    {
+        Square[][] theBoard = board;
+        theBoard = teleport(from, to, theBoard);
+        return deleteBetween(from, to, theBoard);
+    }
+
+
+    private int direction(char c)/**
+     * @returns direction (forward or backward) that
+     *          a piece moves by default.
+     */
+    {
+        if (c == '@')
+            return 1;
+        else
+            return -1;
+    }
+
+
+
+
+
+    protected boolean canJump(Location first, Location second, Square[][] board)/**
+     * @returns whether
+     *          jumping from first to second is kosher.
+     */
+    {
+        int dirX = first.getX() - second.getX();
+        int dirY = first.getY() - second.getY();
+        dirX = dirX / Math.abs(dirX);
+        dirY = dirY / Math.abs(dirY);
+        if (board[first.getX()][first.getY()].isKing() || -1 * dirY == direction(board[first.getX()][first.getY()].getPiece()))
+        {
+            if (Math.abs(first.getX() - second.getX()) < 4 && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
+
+                if (board[second.getX()][second.getY()].getPiece() == ' ')
+                    return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }
