@@ -17,7 +17,7 @@ public class PlayerDumRobit extends Player
     Random randy = new Random();
     Utility use = new Utility();
 
-
+    @Override
     public Square[][] move(Square[][] Board, char c) {
         int radius = 0;
         int dx = 0;
@@ -25,11 +25,14 @@ public class PlayerDumRobit extends Player
 
         Square[][] bEdit = Board;
 
-        Location[] canMove = getPieces(Board);
+        Location[] canMove = getPieces(Board, c);
+        System.out.println(canMove.length);
         LocationSet[] destinations = new LocationSet[canMove.length];
+
 
         for (int x = 0; x < canMove.length; x++)
         {
+            destinations[x] = new LocationSet(canMove[x], null);
             for (int d = 0; d < 4; d++) {
                 for (int r = 0; r < 2; r++) {
 
@@ -52,6 +55,7 @@ public class PlayerDumRobit extends Player
             }
         }
 
+        System.out.println("hiya");
         Boolean hasMoved = false;
         while (!hasMoved && destinations.length > 0) {
             int starts = randy.nextInt(canMove.length);

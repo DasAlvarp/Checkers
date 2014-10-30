@@ -3,16 +3,16 @@ package player;
 import Utils.Square;
 import Utils.Location;
 
-public class Player//basically abstract, but not.
+public class Player
 {
 	private char player;
 	private String playerName;
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	public char getPlayer()
     {
 		return player;
@@ -33,7 +33,7 @@ public class Player//basically abstract, but not.
 
 
     //returns location array of all pieces on the board.
-	public Location[] getPieces(Square[][] board)
+	public Location[] getPieces(Square[][] board, char p)
     {
         Location[] pieces = new Location[12];
         int count = 0;
@@ -41,7 +41,7 @@ public class Player//basically abstract, but not.
         {
             for(int y = 0; y < 8; y++)
             {
-                if(board[x][y].getPiece() == player)
+                if(board[x][y].getPiece() == p)
                 {
                     pieces[count] = new Location(x, y);
                     count++;
@@ -108,8 +108,8 @@ public class Player//basically abstract, but not.
         }
         return false;
     }
-	
-	public Square[][] move(Square[][] board)
+
+	public Square[][] move(Square[][] board, char c)
     {
         return board; //you'd better override this method.
     }
@@ -118,7 +118,7 @@ public class Player//basically abstract, but not.
     private Square[][] delete(int one, int two, Square[][] board)// replaces coordinates piece on
     // theBoard with ' '
     {
-        Square[][] theBoard = new Square[8][8];
+        Square[][] theBoard = board;
         theBoard[one][two] = new Square();
         return theBoard;
     }
@@ -126,7 +126,7 @@ public class Player//basically abstract, but not.
     private Square[][] teleport(Location from, Location to, Square[][] board)// Removes a piece from one
     // place to other
     {
-        Square[][] theBoard = new Square[8][8];
+        Square[][] theBoard = board;
         theBoard[to.getX()][to.getY()] = theBoard[from.getX()][from.getY()];
         theBoard = delete(from.getX(), from.getY(), theBoard);
         return theBoard;
@@ -158,8 +158,7 @@ public class Player//basically abstract, but not.
     // deletes middle, and
     // teleports
     {
-        Square[][] theBoard = board;
-        theBoard = teleport(from, to, theBoard);
+        Square[][] theBoard = teleport(from, to, board);
         return deleteBetween(from, to, theBoard);
     }
 

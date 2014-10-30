@@ -27,8 +27,13 @@ public class LocationSet
 
     public void addEnd(Location l)
     {
-        Location lEnd[] = new Location[locationEnd.length + 1];
-        lEnd[locationEnd.length] = l;
+        Location[] newEnd = new Location[locationEnd.length + 1];
+        newEnd[locationEnd.length] = l;
+        for(int x = 0; x < locationEnd.length; x++)
+        {
+            newEnd[x] = locationEnd[x];
+        }
+        locationEnd = newEnd;
     }
 
     public Location getIndex(int x)

@@ -1,5 +1,6 @@
-import checkersMain.AutoBoard;
 import checkersMain.Board;
+import player.Player;
+import player.PlayerDumRobit;
 
 import java.util.Scanner;
 
@@ -24,11 +25,18 @@ public class CheckersPlayer {
 				.println("If you type something in wrong, you are punished becasue it's always your fault, even when it isn't.");
 		System.out.println("so...enjoy? ---1");
 
-		Scanner scanMan = new Scanner(System.in);
-		AutoBoard robit = new AutoBoard();
-		Board checkers = new Board();
-		while (runs == true) {
-			String in = scanMan.nextLine();
+
+        Player p1 = new PlayerDumRobit();
+        Player p2 = new PlayerDumRobit();
+
+		Board checkers = new Board(p1, p2);
+        checkers.setBoard();
+
+		while (runs == true)
+        {
+
+            checkers.makeMoves();
+/*			String in = scanMan.nextLine();
 			Scanner inScan = new Scanner(in);
 			inScan.useDelimiter(" ");
 			if (in.equalsIgnoreCase("quit")) {
@@ -53,19 +61,17 @@ public class CheckersPlayer {
 				checkers.setBoard();
 				do {
 					System.out.println(checkers);
-					checkers.usersDoThings();
 					checkers.maintenence();
 				} while (checkers.runs() == 0);
 
 			}
 
 			inScan.close();
-
+*/
 		}
 
 		// it's 3 AM and I'm listenign to 3AM. I'm proud of this really good
 		// playlist timing.
-		scanMan.close();
 	}
 
 }

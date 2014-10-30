@@ -2,6 +2,7 @@ package checkersMain;
 
 import Utils.Location;
 import Utils.Square;
+import player.Player;
 
 import java.util.Scanner;
 
@@ -9,7 +10,6 @@ public class Board {
 
 	// all the squares.
 
-	Scanner scanMan = new Scanner(System.in);
 
 	boolean ats = true;// if there are ats or dollars left.
 	boolean dollas = true;
@@ -25,11 +25,23 @@ public class Board {
 
 	protected Square[][] theBoard = new Square[FILE][RANK];
 
+
+    Player p1,
+            p2;
+
 	protected boolean isRunning = true;
 
-	protected boolean montyThisSeemsStrange = false;// for the simulation.
 
-	public int runs()/**
+
+
+    public Board(Player pl1, Player pl2)
+    {
+        p1 = pl1;
+        p2 = pl2;
+    }
+
+
+    public int runs()/**
 	 * @returns if function is running, and if not, the winner,
 	 *          etc...
 	 */
@@ -76,8 +88,6 @@ public class Board {
 
 			}
 		}
-		if (!montyThisSeemsStrange)
-			System.out.println("made the board");
 	}
 
 	private Square findPiece(Location loc)/**
@@ -98,12 +108,7 @@ public class Board {
 		} else {
 			playingChar = '@';
 		}
-
-		if (!montyThisSeemsStrange) {
-			System.out.println("it is " + playerNames[playerTurn]
-					+ "'s turn. (" + playingChar + ")");
-			System.out.println(playerTurn);
-		}
+        System.out.println(playerTurn);
 	}
 
 	public char notPlaying(char s) {
@@ -114,75 +119,25 @@ public class Board {
 		// /nothing else shuold happen. It might, but it shouldn't
 	}
 
-	// BOARD MANIPULATION GOES HERE
-	private void delete(int one, int two)// replaces coordinates piece on
-											// theBoard with ' '
-	{
-		theBoard[one][two] = new Square();
-	}
-
-	private void teleport(Location from, Location to)// Removes a piece from one
-														// place to other
-	{
-		theBoard[to.getX()][to.getY()] = theBoard[from.getX()][from.getY()];
-		delete(from.getX(), from.getY());
-		timeSinceJump++;
-	}
-
-	private void deleteBetween(Location first, Location second)// deletes all
-																// the squares
-																// in a diagonal
-																// between any
-																// two square.
-	{
-		if (Math.abs(first.getX() - second.getX()) != 1) {
-			timeSinceJump = 0;
-		}
-		int dirX = first.getX() - second.getX();
-		int dirY = first.getY() - second.getY();
-		dirX = dirX / Math.abs(dirX);
-		dirY = dirY / Math.abs(dirY);
-		for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
-			delete(first.getX() - dirX * x, first.getY() - dirY * x);
-		}
-	}
 
 
 
-	protected void allTheJumps(Location from, Location to)// tests for all
-															// possible
-															// movements.
-	{
-		if (theBoard[from.getX()][from.getY()].getPiece() == playingChar)// sees
-																			// if
-																			// player
-																			// playing
-																			// is
-																			// controlling
-																			// char
-																			// moving.
-		{
-			if (canJump(from, to))// checks if it's a king or if it's moving in
-									// the correct direction.
-			{
-				jumpThings(from, to);
+    public void makeMoves()
+    {
+        toString();
+        p1.move(theBoard, '@');
+        incrementTurn();
+        maintenence();
+        toString();
+        p2.move(theBoard, '$');
+        incrementTurn();
+        maintenence();
+    }
 
-			} else {
-				if (!montyThisSeemsStrange)
-					System.out.println("You are very dumb.");// haven't really
-																// used other
-																// cases yet,
-																// will use that
-																// later.
-			}
 
-			incrementTurn();
 
-		} else {
-			if (!montyThisSeemsStrange)
-				System.out.println("It's not your turn.");
-		}
-	}
+
+
 
 	public void maintenence()// well, kind of what it sounds like. Kings pieces,
 								// checks for draws, etc...
@@ -227,10 +182,13 @@ public class Board {
 
 	// /SCANNER SECTION! This probably could be another class.
 
+
+
+/*
 	private boolean stahp()/**
 	 * @returns true if somebody says quit. Pretty simple.
 	 *          Not used yet.
-	 */
+	 *
 	{
 		if (scanMan.next().equalsIgnoreCase("quit")) {
 			return true;
@@ -238,10 +196,21 @@ public class Board {
 		return false;
 	}
 
-	private Location parsingInts() {
-		/** @returns array of four text inputs. */
-		return new Location(scanMan.nextInt() - 1, scanMan.nextInt() - 1);
-	}
+
+*/
+
+
+
+
+
+//	private Location parsingInts()
+  //  {
+	//	/** @returns array of four text inputs. */
+	//	return new Location(scanMan.nextInt() - 1, scanMan.nextInt() - 1);
+	//}
+
+
+
 
 	protected int pieces(char c)/**
 	 * @returns the number of pieces of a given
@@ -259,27 +228,9 @@ public class Board {
 		return count;
 	}
 
-	private int[] arrayFuser(int[] a1, int[] a2)// combines 2 int arrays into
-												// one. Not used...yet.
-	{
-		int[] returned = new int[a1.length + a2.length];
-		for (int x = 0; x < a1.length; x++) {
-			returned[x] = a1[x];
-		}
 
-		for (int x = a1.length; x < a1.length + a2.length; x++) {
-			returned[x] = a2[x - a1.length];
-		}
-		return returned;
-	}
 
-	public void usersDoThings()// what the user gets. Basically, text input.
-	{
-		Location from = parsingInts();
-		Location to = parsingInts();
-		allTheJumps(from, to); // I'm gonna have to make this a bit more
-								// complicated.
-	}
+
 
 	/*
 	 * public void getPlayers()//gets the players' names. { Scanner scanMan =

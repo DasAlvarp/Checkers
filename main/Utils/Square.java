@@ -4,7 +4,7 @@
  */
 package Utils;
 
-public class Square {
+public class  Square {
 
 	String mid;
 	char piece; // this way, I could also make chess pieces go here if I wanted
