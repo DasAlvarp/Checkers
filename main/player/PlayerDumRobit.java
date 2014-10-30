@@ -1,19 +1,24 @@
 package player;
-import checkersMain.Square;
+
+import Utils.LocationSet;
+import Utils.Square;
+
 import java.util.Random;
 
-import checkersMain.Location;
+import Utils.Location;
+import Utils.Utility;
 
 /**
  * Created by alvaro on 10/24/14.
  */
-public class sPlayerDumRobit extends Player
+public class PlayerDumRobit extends Player
+
 {
     Random randy = new Random();
+    Utility use = new Utility();
 
 
-    public Square[][] move(Square[][] Board, char c)
-    {
+    public Square[][] move(Square[][] Board, char c) {
         int radius = 0;
         int dx = 0;
         int dy = 0;
@@ -21,47 +26,56 @@ public class sPlayerDumRobit extends Player
         Square[][] bEdit = Board;
 
         Location[] canMove = getPieces(Board);
-        Location[] destinations =  new Location[canMove.length*8];
+        LocationSet[] destinations = new LocationSet[canMove.length];
 
-        int tot = 0;
-        for(int x = 0; x < canMove.length; x++)
+        for (int x = 0; x < canMove.length; x++)
         {
-            for(int d = 0; d < 4; d++)
-            {
-                for(int r = 0; r < 2; r++)
-                {
+            for (int d = 0; d < 4; d++) {
+                for (int r = 0; r < 2; r++) {
 
-                    switch (d)
+                    switch (d) //gets all the possible moves for each one and stores them in the destinations array.
                     {
                         case 0:
-                            destinations[tot] = new Location(canMove[x].getX() + r + 1, canMove[x].getY() + r + 1);
+                            destinations[x].addEnd(new Location(canMove[x].getX() + r + 1, canMove[x].getY() + r + 1));
                             break;
                         case 1:
-                            destinations[tot] = new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1);
+                            destinations[x].addEnd(new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1));
                             break;
                         case 3:
-                            destinations[tot] = new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1);
+                            destinations[x].addEnd(new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1));
                             break;
                         case 4:
-                            destinations[tot] = new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1);
+                            destinations[x].addEnd(new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1));
                             break;
                     }
-                    tot++;
                 }
             }
         }
 
         Boolean hasMoved = false;
-        while (hasMoved)
-        {
+        while (!hasMoved && destinations.length > 0) {
             int starts = randy.nextInt(canMove.length);
-            int index = randy.nextInt(destinations.length);
 
-            if(canJump(canMove[starts], destinations[index], bEdit, c);
+            while (destinations[starts].destinationNum() > 0)
             {
+                int index = randy.nextInt(destinations[starts].destinationNum());
 
+                if(canJump(destinations[starts].getStart(), destinations[starts].getIndex(index), bEdit, c))
+                {
+                    return jumpThings(destinations[starts].getStart(), destinations[starts].getIndex(index), bEdit);
+                }
+                else
+                {
+                    destinations[starts].removeIndex(index);
+                }
             }
+
+            destinations = (LocationSet[])use.deleteIndex(destinations, starts);
         }
+
+
+
+        System.out.println("this shouldn't ever happen, unless the game is drawn.");
         return bEdit;
     }
 }

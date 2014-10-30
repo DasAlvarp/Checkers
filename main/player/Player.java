@@ -1,7 +1,7 @@
 package player;
 
-import checkersMain.Square;
-import checkersMain.Location;
+import Utils.Square;
+import Utils.Location;
 
 public class Player//basically abstract, but not.
 {
@@ -67,14 +67,6 @@ public class Player//basically abstract, but not.
             return '@';
     }
 
-
-    private void jumpThings(Location from, Location to)// jumps over one,
-    // deletes middle, and
-    // teleports
-    {
-        teleport(from, to);
-        deleteBetween(from, to);
-    }
 
 
     private int direction(char c)/**
@@ -162,7 +154,7 @@ public class Player//basically abstract, but not.
 
 
 
-    private Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
+    protected Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
     // deletes middle, and
     // teleports
     {

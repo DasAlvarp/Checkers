@@ -1,5 +1,8 @@
 package checkersMain;
 
+import Utils.Location;
+import Utils.Square;
+
 import java.util.Scanner;
 
 public class Board {

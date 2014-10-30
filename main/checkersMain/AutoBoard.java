@@ -1,5 +1,7 @@
 package checkersMain;
 
+import Utils.Location;
+
 import java.util.Random;
 
 public class AutoBoard extends Board {
