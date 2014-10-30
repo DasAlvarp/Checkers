@@ -124,12 +124,12 @@ public class Board {
 
     public void makeMoves()
     {
-        toString();
-        p1.move(theBoard, '@');
+        System.out.println(toString());
+        theBoard = p1.move(theBoard, '$');
         incrementTurn();
         maintenence();
-        toString();
-        p2.move(theBoard, '$');
+        System.out.println(toString());
+        theBoard = p2.move(theBoard, '@');
         incrementTurn();
         maintenence();
     }
@@ -264,6 +264,7 @@ public class Board {
 		// there's a better way to do this.
 
 		// I changed it.
+
 
 		for (int y = 0; y < FILE; y++) {
 			for (int x = 0; x < RANK; x++) {

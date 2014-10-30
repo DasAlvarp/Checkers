@@ -15,14 +15,10 @@ public class CheckersPlayer {
 		// hiding out
 		// in this thing.
 		boolean runs = true;
-		System.out
-				.println("This is supposed to be a game of checkers. Because it's early in the morning, and it doesn't quite work");
-		System.out
-				.println("still, you might have to use your imagination. Anyways, to move a piece, type in the original coordinates");
-		System.out
-				.println("in some form like '1' enter '2' enter '3' enter '4' enter. SOmething painful along those lines...");
-		System.out
-				.println("If you type something in wrong, you are punished becasue it's always your fault, even when it isn't.");
+		System.out.println("This is supposed to be a game of checkers. Because it's early in the morning, and it doesn't quite work");
+		System.out.println("still, you might have to use your imagination. Anyways, to move a piece, type in the original coordinates");
+		System.out.println("in some form like '1' enter '2' enter '3' enter '4' enter. SOmething painful along those lines...");
+		System.out.println("If you type something in wrong, you are punished becasue it's always your fault, even when it isn't.");
 		System.out.println("so...enjoy? ---1");
 
 

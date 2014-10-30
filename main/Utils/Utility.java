@@ -1,23 +1,26 @@
 package Utils;
 
 
+import java.util.Objects;
 
 /**
  * Created by alvaro on 10/30/14.
  */
 public class Utility {
-    public Object[] deleteIndex(Object[] o, int i) {
+    public LocationSet[] deleteIndex(LocationSet[] o, int i) {
 
+        if (o.length > 1) {
+            LocationSet[] newEnd = new LocationSet[o.length - 1];
+            for (int x = 0; x < i; x++) {
+                newEnd[x] = o[x];
+            }
+            for (int x = i; x < o.length - 1; x++) {
+                newEnd[x] = o[x + 1];
+            }
 
-        Object[] newEnd = new Object[o.length - 1];
-        for (int x = 0; x < i; x++) {
-            newEnd[x] = o[x];
-        }
-        for (int x = i; x < o.length - 1; x++) {
-            newEnd[x - 1] = o[x];
-        }
-
-        return newEnd;
+            return newEnd;
+        } else
+            return null;
     }
 
     private Object[] arrayFuser(Object[] a1, Object[] a2)// combines 2 int arrays into

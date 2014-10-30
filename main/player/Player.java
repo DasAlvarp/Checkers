@@ -90,20 +90,25 @@ public class Player
         int dirY = first.getY() - second.getY();
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
+
+        if(second.getX() > 7 || second.getY() > 7 || second.getX() < 0 || second.getY() < 0 )
+        {
+            return false;
+        }
+
         if (theBoard[first.getX()][first.getY()].isKing()
                 || -1 * dirY == direction(playingChar)) {
             if (Math.abs(first.getX() - second.getX()) < 4
-                    && Math.abs(first.getX() - second.getX()) == Math.abs(first
-                    .getY() - second.getY())) {
+                    && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
 
                 for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
-                    if (theBoard[first.getX() - dirX * x][first.getY() - dirY
-                            * x].getPiece() != notPlaying(playingChar)) {
+                    if (theBoard[first.getX() - dirX * x][first.getY() - dirY * x].getPiece() != notPlaying(playingChar)) {
                         return false;
                     }
                 }
-                if (theBoard[second.getX()][second.getY()].getPiece() == ' ')
+                if (theBoard[second.getX()][second.getY()].getPiece() == ' ') {
                     return true;
+                }
             }
         }
         return false;
