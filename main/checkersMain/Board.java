@@ -3,6 +3,7 @@ package checkersMain;
 import Utils.Location;
 import Utils.Square;
 import player.Player;
+import player.PlayerSmartRobit;
 
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class Board {
 	protected boolean isRunning = true;
 
 
-
+    private PlayerSmartRobit privateEval = new PlayerSmartRobit();
 
     public Board(Player pl1, Player pl2)
     {
@@ -111,13 +112,7 @@ public class Board {
         System.out.println(playerTurn);
 	}
 
-	public char notPlaying(char s) {
-		if (s == '@')
-			return '$';
-		else
-			return '@';
-		// /nothing else shuold happen. It might, but it shouldn't
-	}
+
 
 
 
@@ -126,10 +121,12 @@ public class Board {
     {
         System.out.println(toString());
         theBoard = p1.move(theBoard, '$');
+        System.out.println(privateEval.evaluate(theBoard, '$') + "");
         incrementTurn();
         maintenence();
         System.out.println(toString());
         theBoard = p2.move(theBoard, '@');
+        System.out.println(privateEval.evaluate(theBoard, '@') + "");
         incrementTurn();
         maintenence();
     }
@@ -208,21 +205,7 @@ public class Board {
 
 
 
-	protected int pieces(char c)/**
-	 * @returns the number of pieces of a given
-	 *          character left.
-	 */
-	{
-		int count = 0;
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
-				if (theBoard[x][y].getPiece() == c) {
-					count++;
-				}
-			}
-		}
-		return count;
-	}
+
 
 
 

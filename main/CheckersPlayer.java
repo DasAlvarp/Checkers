@@ -24,7 +24,7 @@ public class CheckersPlayer {
 
 
         Player p1 = new PlayerDumRobit();
-        Player p2 = new PlayerHuman();
+        Player p2 = new PlayerDumRobit();
 
 		Board checkers = new Board(p1, p2);
         checkers.setBoard();

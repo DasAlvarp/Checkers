@@ -97,6 +97,11 @@ public class Player
     }
 
 
+    protected int getDirection(char c)
+    {
+        return direction(c);
+    }
+
 
     protected boolean canJump(Location first, Location second, Square[][] theBoard, char playingChar)/**
      * @returns whether
@@ -182,31 +187,6 @@ public class Player
     {
         Square[][] theBoard = teleport(from, to, board);
         return deleteBetween(from, to, theBoard);
-    }
-
-
-
-
-
-
-    protected boolean canJump(Location first, Location second, Square[][] board)/**
-     * @returns whether
-     *          jumping from first to second is kosher.
-     */
-    {
-        int dirX = first.getX() - second.getX();
-        int dirY = first.getY() - second.getY();
-        dirX = dirX / Math.abs(dirX);
-        dirY = dirY / Math.abs(dirY);
-        if (board[first.getX()][first.getY()].isKing() || -1 * dirY == direction(board[first.getX()][first.getY()].getPiece()))
-        {
-            if (Math.abs(first.getX() - second.getX()) < 4 && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
-
-                if (board[second.getX()][second.getY()].getPiece() == ' ')
-                    return true;
-            }
-        }
-        return false;
     }
 
 
