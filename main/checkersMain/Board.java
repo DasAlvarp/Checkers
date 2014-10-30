@@ -203,11 +203,7 @@ public class Board {
 
 
 
-//	private Location parsingInts()
-  //  {
-	//	/** @returns array of four text inputs. */
-	//	return new Location(scanMan.nextInt() - 1, scanMan.nextInt() - 1);
-	//}
+
 
 
 

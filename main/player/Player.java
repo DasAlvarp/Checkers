@@ -80,6 +80,23 @@ public class Player
             return -1;
     }
 
+    protected int pieces(char c, Square[][] theBoard)/**
+     * @returns the number of pieces of a given
+     *          character left.
+     */
+    {
+        int count = 0;
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                if (theBoard[x][y].getPiece() == c) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
 
     protected boolean canJump(Location first, Location second, Square[][] theBoard, char playingChar)/**
      * @returns whether

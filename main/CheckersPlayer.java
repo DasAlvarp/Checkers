@@ -1,6 +1,7 @@
 import checkersMain.Board;
 import player.Player;
 import player.PlayerDumRobit;
+import player.PlayerHuman;
 
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class CheckersPlayer {
 
 
         Player p1 = new PlayerDumRobit();
-        Player p2 = new PlayerDumRobit();
+        Player p2 = new PlayerHuman();
 
 		Board checkers = new Board(p1, p2);
         checkers.setBoard();
