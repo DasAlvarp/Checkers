@@ -7,12 +7,12 @@ import checkersMain.Location;
 /**
  * Created by alvaro on 10/24/14.
  */
-public class PlayerDumRobit extends Player
+public class sPlayerDumRobit extends Player
 {
     Random randy = new Random();
 
 
-    public Square[][] move(Square[][] Board)
+    public Square[][] move(Square[][] Board, char c)
     {
         int radius = 0;
         int dx = 0;
@@ -51,8 +51,17 @@ public class PlayerDumRobit extends Player
             }
         }
 
-        while()
+        Boolean hasMoved = false;
+        while (hasMoved)
+        {
+            int starts = randy.nextInt(canMove.length);
+            int index = randy.nextInt(destinations.length);
 
+            if(canJump(canMove[starts], destinations[index], bEdit, c);
+            {
+
+            }
+        }
         return bEdit;
     }
 }

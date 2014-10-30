@@ -60,9 +60,62 @@ public class Player//basically abstract, but not.
 
     }
 
+    public char notPlaying(char s) {
+        if (s == '@')
+            return '$';
+        else
+            return '@';
+    }
 
 
-	
+    private void jumpThings(Location from, Location to)// jumps over one,
+    // deletes middle, and
+    // teleports
+    {
+        teleport(from, to);
+        deleteBetween(from, to);
+    }
+
+
+    private int direction(char c)/**
+     * @returns direction (forward or backward) that
+     *          a piece moves by default.
+     */
+    {
+        if (c == '@')
+            return 1;
+        else
+            return -1;
+    }
+
+
+    protected boolean canJump(Location first, Location second, Square[][] theBoard, char playingChar)/**
+     * @returns whether
+     *          jumping from first to second is kosher.
+     */
+    {
+        int dirX = first.getX() - second.getX();
+        int dirY = first.getY() - second.getY();
+        dirX = dirX / Math.abs(dirX);
+        dirY = dirY / Math.abs(dirY);
+        if (theBoard[first.getX()][first.getY()].isKing()
+                || -1 * dirY == direction(playingChar)) {
+            if (Math.abs(first.getX() - second.getX()) < 4
+                    && Math.abs(first.getX() - second.getX()) == Math.abs(first
+                    .getY() - second.getY())) {
+
+                for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
+                    if (theBoard[first.getX() - dirX * x][first.getY() - dirY
+                            * x].getPiece() != notPlaying(playingChar)) {
+                        return false;
+                    }
+                }
+                if (theBoard[second.getX()][second.getY()].getPiece() == ' ')
+                    return true;
+            }
+        }
+        return false;
+    }
 	
 	public Square[][] move(Square[][] board)
     {
@@ -118,17 +171,6 @@ public class Player//basically abstract, but not.
         return deleteBetween(from, to, theBoard);
     }
 
-
-    private int direction(char c)/**
-     * @returns direction (forward or backward) that
-     *          a piece moves by default.
-     */
-    {
-        if (c == '@')
-            return 1;
-        else
-            return -1;
-    }
 
 
 
