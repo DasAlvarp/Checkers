@@ -1,6 +1,9 @@
 package player;
 
 import Utils.*;
+import Utils.LocationManipulation.Location;
+import Utils.LocationManipulation.LocationSet;
+import Utils.LocationManipulation.MoveAndEvaluation;
 
 import java.util.ArrayList;
 import java.util.Iterator;

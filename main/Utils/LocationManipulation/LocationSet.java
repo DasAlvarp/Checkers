@@ -1,4 +1,4 @@
-package Utils;
+package Utils.LocationManipulation;
 
 /**
  * Created by alvaro on 10/30/14.

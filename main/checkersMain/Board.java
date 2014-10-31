@@ -1,11 +1,9 @@
 package checkersMain;
 
-import Utils.Location;
+import Utils.LocationManipulation.Location;
 import Utils.Square;
 import player.Player;
 import player.PlayerSmartRobit;
-
-import java.util.Scanner;
 
 public class Board {
 

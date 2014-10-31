@@ -1,6 +1,6 @@
 package player;
 
-import Utils.Location;
+import Utils.LocationManipulation.Location;
 import Utils.Square;
 
 import java.util.Scanner;
