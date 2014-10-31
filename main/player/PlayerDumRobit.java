@@ -57,10 +57,12 @@ public class PlayerDumRobit extends Player
 
         System.out.println("hiya");
         Boolean hasMoved = false;
-        while (!hasMoved && destinations != null ) {
-            int starts = randy.nextInt(destinations.length);
+        while (destinations != null ) {
+            int starts = 0;
+            if(destinations.length > 1)
+                starts = randy.nextInt(destinations.length);
 
-            while (destinations[starts].destinationNum() > 0 && destinations != null)
+            while (destinations[starts].destinationNum() > 0)
             {
                 int index = randy.nextInt(destinations[starts].destinationNum());
 

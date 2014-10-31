@@ -11,10 +11,24 @@ public class LocationSet {
         locationStart = start;
         locationEnd = ends;
     }
+    public  LocationSet(Location start)
+    {
+        this(start, null);
+    }
+
+    public LocationSet()
+    {
+        this(null);
+    }
 
 
     public Location getStart() {
         return locationStart;
+    }
+
+    public void setLocationStart(Location l)
+    {
+        locationStart = l;
     }
 
     public Location getEnd(int x) {
