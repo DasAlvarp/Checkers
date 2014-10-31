@@ -34,6 +34,13 @@ public class CheckersPlayer {
         {
 
             checkers.makeMoves();
+            if(checkers.runs() == 0) {
+                //stub
+            }
+            else
+            {
+                runs = false;
+            }
 /*			String in = scanMan.nextLine();
 			Scanner inScan = new Scanner(in);
 			inScan.useDelimiter(" ");

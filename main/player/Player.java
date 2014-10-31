@@ -118,8 +118,7 @@ public class Player
             return false;
         }
 
-        if (theBoard[first.getX()][first.getY()].isKing()
-                || -1 * dirY == direction(playingChar)) {
+        if (theBoard[first.getX()][first.getY()].isKing() || -1 * dirY == direction(playingChar)) {
             if (Math.abs(first.getX() - second.getX()) < 4
                     && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
 
