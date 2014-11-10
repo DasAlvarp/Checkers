@@ -26,9 +26,9 @@ public class EvalStruct {
      *
      * @return all legal moves
      */
-    public LocationSet[] legalMoves() {
+    public LocationSet[] legalMoves(Square[][] board) {
 
-        Location[] canMove = p.getPieces(boardState, player);
+        Location[] canMove = p.getPieces(board, player);
         LocationSet[] destinations = new LocationSet[canMove.length];
 
 //all squares and anywhere they could dream of landing
@@ -40,27 +40,27 @@ public class EvalStruct {
                     {
                         case 0:
                             Location temp = new Location(canMove[x].getX() + r + 1, canMove[x].getY() + r + 1);
-                            if (p.canJump(destinations[x].getStart(), temp, boardState, player)) {
+                            if (p.canJump(destinations[x].getStart(), temp, board, player)) {
                                 destinations[x].addEnd(temp);
 
                             }
                             break;
                         case 1:
                             Location tem = new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1);
-                            if (p.canJump(destinations[x].getStart(), tem, boardState, player)) {
+                            if (p.canJump(destinations[x].getStart(), tem, board, player)) {
 
                                 destinations[x].addEnd(tem);
                             }
                             break;
                         case 3:
                             Location te = new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1);
-                            if (p.canJump(destinations[x].getStart(), te, boardState, player)) {
+                            if (p.canJump(destinations[x].getStart(), te, board, player)) {
                                 destinations[x].addEnd(te);
                             }
                             break;
                         case 4:
                             Location t = new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1);
-                            if ((p.canJump(destinations[x].getStart(), t, boardState, player))) {
+                            if ((p.canJump(destinations[x].getStart(), t, board, player))) {
                                 destinations[x].addEnd(t);
                             }
                             break;
@@ -73,24 +73,24 @@ public class EvalStruct {
 
 
     /**
-     * @param deep-depth    of stuffs.
+     * @param deep-depth    of recursion..
      * @param board-board   state to be messed with..
      * @param c-perspective of person to move.
      */
     public EvalStruct(int deep, Square[][] board, char c) {
         System.out.println("Making evaluation structure. Depth: " + deep);
-        this.depth = deep;
-        this.boardState = board;
-        this.player = c;
+        depth = deep;
+        boardState = board;
+        player = c;
 
 
-        if (this.depth > 0) {
-            LocationSet[] legalMoves = legalMoves();
+        if (depth > 0) {
+            LocationSet[] legalMoves = legalMoves(boardState);
 
 
             for (int x = 0; x < legalMoves.length; x++) {
                 for (int y = 0; y < legalMoves[x].destinationNum(); y++) {
-                    this.otherEvals.add(new EvalStruct(deep - 1, p.kinging(p.jumpThings(legalMoves[x].getStart(), legalMoves[x].getIndex(y), boardState)), c));
+                    otherEvals.add(new EvalStruct(deep - 1, p.kinging(p.jumpThings(legalMoves[x].getStart(), legalMoves[x].getIndex(y), boardState)), p.notPlaying(c)));
                 }
 
             }
@@ -99,16 +99,18 @@ public class EvalStruct {
 
 
         if (this.depth == 0) {
-            eval = evaluate(boardState, c);
-            this.bestMove = this.boardState;
+            eval = -1 * evaluate(boardState, c);
+            bestMove = boardState;
 
         } else {
-            this.eval = otherEvals.get(0).eval;
-            this.bestMove = otherEvals.get(0).boardState;
+            eval = otherEvals.get(0).eval;
+            System.out.println("Eval is: " + eval);
+            bestMove = otherEvals.get(0).boardState;
             for (int x = 1; x < otherEvals.size(); x++) {
-                if (otherEvals.get(x).eval > this.eval) {
-                    this.eval = otherEvals.get(x).eval;
-                    this.bestMove = otherEvals.get(x).boardState;
+                if (otherEvals.get(x).eval > eval) {
+                    eval = otherEvals.get(x).eval;
+                    bestMove = otherEvals.get(x).boardState;
+                    System.out.println("Eval is: " + eval);
                 }
             }
         }
