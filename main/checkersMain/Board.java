@@ -3,7 +3,6 @@ package checkersMain;
 import Utils.LocationManipulation.Location;
 import Utils.Square;
 import player.Player;
-import player.PlayerSmartRobit;
 
 public class Board {
 

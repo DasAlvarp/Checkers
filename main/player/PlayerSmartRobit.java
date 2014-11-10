@@ -1,7 +1,6 @@
 package player;
 
 import Utils.EvalStruct;
-import Utils.LocationManipulation.Location;
 import Utils.Square;
 
 /**
