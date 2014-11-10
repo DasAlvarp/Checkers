@@ -7,6 +7,11 @@ public class LocationSet {
     private Location locationStart;
     private Location[] locationEnd;
 
+    /**
+     *
+     * @param start starting location
+     * @param ends all the possible points to move to.
+     */
     public LocationSet(Location start, Location[] ends) {
         locationStart = start;
         locationEnd = ends;

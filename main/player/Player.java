@@ -60,6 +60,11 @@ public class Player
 
     }
 
+    /**
+     *
+     * @param s player playing
+     * @return player not playing.
+     */
     public char notPlaying(char s) {
         if (s == '@')
             return '$';
@@ -150,7 +155,11 @@ public class Player
     }
 
 
-
+    /**
+     *
+     * @param theBoard to be edited
+     * @return board with properly king'd pieces.
+     */
     public Square[][] kinging(Square[][] theBoard) {
         for (int x = 0; x < 8; x++)// kinging.
         {

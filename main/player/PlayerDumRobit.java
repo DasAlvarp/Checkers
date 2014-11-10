@@ -55,7 +55,6 @@ public class PlayerDumRobit extends Player
             }
         }
 
-        System.out.println("hiya");
         Boolean hasMoved = false;
         while (destinations != null ) {
             int starts = 0;

@@ -111,10 +111,9 @@ public class Board {
 	}
 
 
-
-
-
-
+    /**
+     * fuction to make both sides do their turn.
+     */
     public void makeMoves()
     {
         System.out.println(toString());
@@ -134,7 +133,9 @@ public class Board {
 
 
 
-
+/**
+ * does general maintentence on stuff.
+ */
 	public void maintenence()// well, kind of what it sounds like. Kings pieces,
 								// checks for draws, etc...
 	{

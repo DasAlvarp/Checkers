@@ -5,6 +5,8 @@ import Utils.LocationManipulation.LocationSet;
 
 /**
  * Created by alvaro on 10/30/14.
+ *
+ * Basically useful functions that I don't know where to put anywhere else.
  */
 public class Utility {
     public LocationSet[] deleteIndex(LocationSet[] o, int i) {
