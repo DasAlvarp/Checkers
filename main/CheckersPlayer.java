@@ -1,7 +1,10 @@
 import checkersMain.Board;
 import player.Player;
 import player.PlayerDumRobit;
+import player.PlayerHuman;
 import player.PlayerSmartRobit;
+
+import java.util.Scanner;
 
 /**
  * @author Alvaro Gudiswitz
@@ -9,6 +12,12 @@ import player.PlayerSmartRobit;
  */
 public class CheckersPlayer {
 	public static void main(String args[]) {
+        Player p1;
+        Player p2;
+
+        int numReps;
+        boolean showThings;
+        Scanner scanMan = new Scanner(System.in);
 		// this place is totally the wrong place to put some of this stuff, next
 		// version probably will include a main loop class to hide crap that's
 		// hiding out
@@ -20,24 +29,106 @@ public class CheckersPlayer {
 		System.out.println("If you type something in wrong, you are punished becasue it's always your fault, even when it isn't.");
 		System.out.println("so...enjoy? ---1");
 
+        System.out.println("I'm going to be gross and manually figure out everything you want.");
 
-        Player p1 = new PlayerDumRobit();
-        Player p2 = new PlayerSmartRobit();
-
-		Board checkers = new Board(p1, p2);
-        checkers.setBoard();
-
-		while (runs == true)
+        System.out.println("Are you going to be in the game? Y for yes, anything else for no?");
+        if(scanMan.next().equalsIgnoreCase("y"))
         {
-
-            checkers.makeMoves();
-            if(checkers.runs() == 0) {
-                //stub
+            System.out.println("Do you have are there two humans playing?");
+            if(scanMan.next().equalsIgnoreCase(("y")))
+            {
+                p1 = new PlayerHuman();
+                p2 = new PlayerHuman();
             }
             else
             {
-                runs = false;
+                System.out.println("Do you want to play against an AI?");
+                if(scanMan.next().equalsIgnoreCase("Y")) {
+                    System.out.println("Do you want to be player 1?");
+                    if (scanMan.next().equalsIgnoreCase("Y")) {
+                        p1 = new PlayerHuman();
+                        p2 = new PlayerSmartRobit();
+                    } else {
+                        p2 = new PlayerHuman();
+                        p1 = new PlayerSmartRobit();
+                    }
+                }
+                else {
+                    System.out.println("Do you want to be player 1?");
+                    if (scanMan.next().equalsIgnoreCase("Y")) {
+                        p1 = new PlayerHuman();
+                        p2 = new PlayerSmartRobit();
+                    } else {
+                        p2 = new PlayerHuman();
+                        p1 = new PlayerSmartRobit();
+                    }
+                }
             }
+        }
+        else
+        {
+            System.out.println("Do you want two smart AI's to play?");
+            if(scanMan.next().equalsIgnoreCase("y"))
+            {
+                p1 = new PlayerSmartRobit();
+                p2 = new PlayerSmartRobit();
+            }
+            else
+            {
+                System.out.println("Do you want one smart AI?");
+                if(scanMan.next().equalsIgnoreCase("y"))
+                {
+                    System.out.println("Do you want it to be player 1?");
+                    if(scanMan.next().equalsIgnoreCase("y"))
+                    {
+                        p1 = new PlayerSmartRobit();
+                        p2 = new PlayerDumRobit();
+                    }
+                    else
+                    {
+                        p1 = new PlayerDumRobit();
+                        p2 = new PlayerSmartRobit();
+                    }
+                }
+                else
+                {
+                    p1 = new PlayerDumRobit();
+                    p2 = new PlayerDumRobit();
+                }
+            }
+        }
+
+        System.out.println("Do you want it to show stuff?");
+        if(scanMan.next().equalsIgnoreCase("y"))
+        {
+            showThings = true;
+        }
+        else
+        {
+            showThings = false;
+        }
+
+        System.out.println("how many games do you want to play?");
+        numReps = scanMan.nextInt() - 1;
+
+
+
+		Board checkers = new Board(p1, p2, showThings);
+
+       for(int x = 0; x < numReps; x++)
+       {
+           checkers.setBoard();
+           while (runs == true)
+           {
+
+               checkers.makeMoves();
+               if(checkers.runs() == 0) {
+                   //stub
+               }
+               else
+               {
+                   runs = false;
+               }
 /*			String in = scanMan.nextLine();
 			Scanner inScan = new Scanner(in);
 			inScan.useDelimiter(" ");
@@ -70,10 +161,16 @@ public class CheckersPlayer {
 
 			inScan.close();
 */
-		}
+           }
 
-		// it's 3 AM and I'm listenign to 3AM. I'm proud of this really good
-		// playlist timing.
-	}
+           // it's 3 AM and I'm listenign to 3AM. I'm proud of this really good
+           // playlist timing.
+       }
+
+       }
+
+
+
+
 
 }

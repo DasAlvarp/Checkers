@@ -9,6 +9,7 @@ public class Board {
 	// all the squares.
 
 
+    protected boolean showStuff;
 	boolean ats = true;// if there are ats or dollars left.
 	boolean dollas = true;
 
@@ -31,10 +32,11 @@ public class Board {
 
 
 
-    public Board(Player pl1, Player pl2)
+    public Board(Player pl1, Player pl2, boolean show)
     {
         p1 = pl1;
         p2 = pl2;
+        showStuff = show;
     }
 
 
@@ -115,13 +117,17 @@ public class Board {
      */
     public void makeMoves()
     {
-        System.out.println(toString());
-        theBoard = p1.move(theBoard, '$');
+        if(showStuff) {
+            System.out.println(toString());
+        }
+            theBoard = p1.move(theBoard, '$');
         maintenence();
         incrementTurn();
         if(runs() == 0) {
             maintenence();
-            System.out.println(toString());
+            if(showStuff) {
+                System.out.println(toString());
+            }
             theBoard = p2.move(theBoard, '@');
             incrementTurn();
             maintenence();
