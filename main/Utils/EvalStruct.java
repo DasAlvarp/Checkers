@@ -143,7 +143,7 @@ public class EvalStruct {
                     Location[] moves = new Location[2];
                     moves[0] = legalMoves[x].getStart();
                     moves[1] = legalMoves[x].getIndex(y);
-                    this.otherEvals.add(new EvalStruct(deep - 1, p.kinging(p.jumpThings(moves[0], moves[1], board)), p.notPlaying(c)));
+                    this.otherEvals.add(new EvalStruct(deep - 1, (p.jumpThings(moves[0], moves[1], board)), p.notPlaying(c)));
                     moveList.add(moves);
                 }
 

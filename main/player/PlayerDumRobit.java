@@ -18,9 +18,6 @@ public class PlayerDumRobit extends Player
 
     @Override
     public Square[][] move(Square[][] Board, char c) {
-        int radius = 0;
-        int dx = 0;
-        int dy = 0;
 
         Square[][] bEdit = Board;
 
