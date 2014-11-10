@@ -43,10 +43,10 @@ public class PlayerDumRobit extends Player
                         case 1:
                             destinations[x].addEnd(new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1));
                             break;
-                        case 3:
+                        case 2:
                             destinations[x].addEnd(new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1));
                             break;
-                        case 4:
+                        case 3:
                             destinations[x].addEnd(new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1));
                             break;
                     }
