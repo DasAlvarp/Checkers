@@ -15,9 +15,7 @@ public class PlayerSmartRobit extends Player {
     @Override
     public Square[][] move(Square[][] Board, char c) {//default depth...
         EvalStruct main = new EvalStruct(1, Board, c);
-        System.out.println(main.eval);
-        return main.bestMove;
+        //System.out.println(main.getEval());
+        return main.getBestMove();
     }
-
-
 }
