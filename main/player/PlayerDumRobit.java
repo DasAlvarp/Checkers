@@ -1,12 +1,11 @@
 package player;
 
+import Utils.LocationManipulation.Location;
 import Utils.LocationManipulation.LocationSet;
 import Utils.Square;
+import Utils.Utility;
 
 import java.util.Random;
-
-import Utils.LocationManipulation.Location;
-import Utils.Utility;
 
 /**
  * Created by alvaro on 10/24/14.

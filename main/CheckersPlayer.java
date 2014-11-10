@@ -1,10 +1,7 @@
 import checkersMain.Board;
 import player.Player;
 import player.PlayerDumRobit;
-import player.PlayerHuman;
 import player.PlayerSmartRobit;
-
-import java.util.Scanner;
 
 /**
  * @author Alvaro Gudiswitz

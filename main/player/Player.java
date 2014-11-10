@@ -1,7 +1,7 @@
 package player;
 
-import Utils.Square;
 import Utils.LocationManipulation.Location;
+import Utils.Square;
 
 public class Player
 {
