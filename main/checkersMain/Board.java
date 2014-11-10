@@ -119,14 +119,12 @@ public class Board {
     {
         System.out.println(toString());
         theBoard = p1.move(theBoard, '$');
-        System.out.println(privateEval.evaluate(theBoard, '$') + "");
         maintenence();
         incrementTurn();
         if(runs() == 0) {
             maintenence();
             System.out.println(toString());
             theBoard = p2.move(theBoard, '@');
-            System.out.println(privateEval.evaluate(theBoard, '@') + "");
             incrementTurn();
             maintenence();
         }

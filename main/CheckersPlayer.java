@@ -24,7 +24,7 @@ public class CheckersPlayer {
 		System.out.println("so...enjoy? ---1");
 
 
-        Player p1 = new PlayerDumRobit();
+        Player p1 = new PlayerSmartRobit();
         Player p2 = new PlayerDumRobit();
 
 		Board checkers = new Board(p1, p2);

@@ -80,7 +80,7 @@ public class Player
             return -1;
     }
 
-    protected int pieces(char c, Square[][] theBoard)/**
+    public int pieces(char c, Square[][] theBoard)/**
      * @returns the number of pieces of a given
      *          character left.
      */
@@ -97,13 +97,13 @@ public class Player
     }
 
 
-    protected int getDirection(char c)
+    public int getDirection(char c)
     {
         return direction(c);
     }
 
 
-    protected boolean canJump(Location first, Location second, Square[][] theBoard, char playingChar)/**
+    public boolean canJump(Location first, Location second, Square[][] theBoard, char playingChar)/**
      * @returns whether
      *          jumping from first to second is kosher.
      */
@@ -149,6 +149,20 @@ public class Player
         return theBoard;
     }
 
+
+
+    public Square[][] kinging(Square[][] theBoard) {
+        for (int x = 0; x < 8; x++)// kinging.
+        {
+            if (theBoard[x][7].getPiece() == '@') {
+                theBoard[x][7].king();
+            } else if (theBoard[x][0].getPiece() == '$') {
+                theBoard[x][0].king();
+            }
+        }
+        return theBoard;
+    }
+
     private Square[][] teleport(Location from, Location to, Square[][] board)// Removes a piece from one
     // place to other
     {
@@ -180,7 +194,7 @@ public class Player
 
 
 
-    protected Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
+    public Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
     // deletes middle, and
     // teleports
     {
