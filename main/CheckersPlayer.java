@@ -1,6 +1,7 @@
 import checkersMain.Board;
 import player.Player;
 import player.PlayerDumRobit;
+import player.PlayerHuman;
 import player.PlayerSmartRobit;
 
 /**
@@ -21,8 +22,8 @@ public class CheckersPlayer {
 		System.out.println("so...enjoy? ---1");
 
 
-        Player p1 = new PlayerSmartRobit();
         Player p2 = new PlayerDumRobit();
+        Player p1 = new PlayerSmartRobit();
 
 		Board checkers = new Board(p1, p2);
         checkers.setBoard();

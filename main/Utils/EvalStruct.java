@@ -4,6 +4,7 @@ import Utils.LocationManipulation.Location;
 import Utils.LocationManipulation.LocationSet;
 import player.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -61,6 +62,9 @@ public class EvalStruct {
     private ArrayList<EvalStruct> otherEvals = new ArrayList<EvalStruct>();
     private char player;
     private int depth;
+    private ArrayList<Location[]> moveList = new ArrayList<Location[]>();
+    private Location[] moveCoords;
+
 
     Random randy = new Random();
     Utility use = new Utility();
@@ -69,10 +73,6 @@ public class EvalStruct {
 
 
 
-    public EvalStruct()
-    {
-        //stub.
-    }
     /**
      *
      * @return all legal moves
@@ -175,7 +175,11 @@ public class EvalStruct {
 
             for (int x = 0; x < legalMoves.length; x++) {
                 for (int y = 0; y < legalMoves[x].destinationNum(); y++) {
-                    this.otherEvals.add(new EvalStruct(deep - 1, p.kinging(p.jumpThings(legalMoves[x].getStart(), legalMoves[x].getIndex(y), board)), p.notPlaying(c)));
+                    Location[] moves = new Location[2];
+                    moves[0] = legalMoves[x].getStart();
+                    moves[1] = legalMoves[x].getIndex(y);
+                    this.otherEvals.add(new EvalStruct(deep - 1, p.kinging(p.jumpThings(moves[0], moves[1], board)), p.notPlaying(c)));
+                    moveList.add(moves);
                 }
 
             }
@@ -201,17 +205,27 @@ public class EvalStruct {
                 eval = otherEvals.get(0).getEval();
                 System.out.println("Eval is: " + eval);
                 this.bestMove = otherEvals.get(0).boardState;
+                this.moveCoords = moveList.get(0);
                 for (int x = 1; x < otherEvals.size(); x++) {
                     if (otherEvals.get(x).eval > eval) {
                         eval = otherEvals.get(x).getEval();
                         bestMove = otherEvals.get(x).boardState;
                         System.out.println("Eval is: " + eval);
+                        this.moveCoords = moveList.get(x);
+
                     }
                 }
             }
         }
 
     }
+
+
+    public Location[] getMoveCoords()
+    {
+        return moveCoords;
+    }
+
 
 
     /**

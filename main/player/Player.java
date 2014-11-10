@@ -113,8 +113,8 @@ public class Player
      *          jumping from first to second is kosher.
      */
     {
-        int dirX = first.getX() - second.getX();
-        int dirY = first.getY() - second.getY();
+        int dirX = second.getX() - first.getX();
+        int dirY = second.getY() - first.getY();
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
 
@@ -123,12 +123,12 @@ public class Player
             return false;
         }
 
-        if (theBoard[first.getX()][first.getY()].isKing() || -1 * dirY == direction(playingChar)) {
+        if (theBoard[first.getX()][first.getY()].isKing() || dirY == direction(playingChar)) {
             if (Math.abs(first.getX() - second.getX()) < 4
                     && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
 
                 for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
-                    if (theBoard[first.getX() - dirX * x][first.getY() - dirY * x].getPiece() != notPlaying(playingChar)) {
+                    if (theBoard[first.getX() + dirX * x][first.getY() + dirY * x].getPiece() != notPlaying(playingChar)) {
                         return false;
                     }
                 }
@@ -207,8 +207,8 @@ public class Player
     // deletes middle, and
     // teleports
     {
-        Square[][] theBoard = teleport(from, to, board);
-        return deleteBetween(from, to, theBoard);
+        board = teleport(from, to, board);
+        return deleteBetween(from, to, board);
     }
 
 

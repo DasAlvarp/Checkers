@@ -74,7 +74,7 @@ public class PlayerDumRobit extends Player
                 }
             }
 
-            destinations = (LocationSet[])use.deleteIndex(destinations, starts);
+            destinations = use.deleteIndex(destinations, starts);
         }
 
 

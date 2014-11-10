@@ -32,7 +32,7 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [x=" + x + ", y=" + y + "]";
+		return "Location [x=" + (x + 1) + ", y=" + (y + 1) + "]";
 	}
 
 }
