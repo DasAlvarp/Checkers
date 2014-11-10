@@ -31,7 +31,6 @@ public class Board {
 	protected boolean isRunning = true;
 
 
-    private PlayerSmartRobit privateEval = new PlayerSmartRobit();
 
     public Board(Player pl1, Player pl2)
     {
@@ -40,7 +39,8 @@ public class Board {
     }
 
 
-    public int runs()/**
+    public int runs()
+    /**
 	 * @returns if function is running, and if not, the winner,
 	 *          etc...
 	 */

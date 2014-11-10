@@ -37,6 +37,7 @@ public class  Square {
 			mid = String.format("%1s %1c %1s", "|", '#', "|");
 		else if (piece == '$')
 			mid = String.format("%1s %1c %1s", "|", '&', "|");
+        System.out.println("King'd at a time");
 
 	}
 

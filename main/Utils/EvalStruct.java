@@ -4,7 +4,6 @@ import Utils.LocationManipulation.Location;
 import Utils.LocationManipulation.LocationSet;
 import player.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -122,40 +121,6 @@ public class EvalStruct {
     }
 
 
-    /**
-     *
-     * @param board
-     * @param c
-     * @return best move with depth 1.
-     */
-    public Square[][] getLazyBestMove(Square[][] board, char c)
-    {
-        LocationSet[] legalMoves = legalMoves(board, c);
-
-        ArrayList<Square[][]> possibleEnds = new ArrayList<Square[][]>();
-
-        for (int x = 0; x < legalMoves.length; x++) {
-            for (int y = 0; y < legalMoves[x].destinationNum(); y++) {
-                 possibleEnds.add(p.kinging(p.jumpThings(legalMoves[x].getStart(), legalMoves[x].getIndex(y), board)));
-            }
-        }
-
-        double thing = evaluate(possibleEnds.get(0), c);
-        board = possibleEnds.get(0);
-        for(int x = 1; x < possibleEnds.size(); x++)
-        {
-            double tempThing = evaluate(possibleEnds.get(x), c);
-            if(tempThing > thing)
-            {
-                thing = tempThing;
-                board = possibleEnds.get(x);
-
-            }
-        }
-        return board;
-
-    }
-
 
     /**
      * @param deep-depth    of recursion..
@@ -163,7 +128,7 @@ public class EvalStruct {
      * @param c-perspective of person to move.
      */
     public EvalStruct(int deep, Square[][] board, char c) {
-        System.out.println("Making evaluation structure. Depth: " + deep);
+       // System.out.println("Making evaluation structure. Depth: " + deep);
         this.depth = deep;
         this.boardState = board;
         this.player = c;
@@ -203,14 +168,14 @@ public class EvalStruct {
             else
             {
                 eval = otherEvals.get(0).getEval();
-                System.out.println("Eval is: " + eval);
+              //  System.out.println("Eval is: " + eval);
                 this.bestMove = otherEvals.get(0).boardState;
                 this.moveCoords = moveList.get(0);
                 for (int x = 1; x < otherEvals.size(); x++) {
                     if (otherEvals.get(x).eval > eval) {
                         eval = otherEvals.get(x).getEval();
                         bestMove = otherEvals.get(x).boardState;
-                        System.out.println("Eval is: " + eval);
+                       // System.out.println("Eval is: " + eval);
                         this.moveCoords = moveList.get(x);
 
                     }
