@@ -117,6 +117,7 @@ public class CheckersPlayer {
 
        for(int x = 0; x < numReps; x++)
        {
+           runs = true;
            checkers.setBoard();
            while (runs == true)
            {
