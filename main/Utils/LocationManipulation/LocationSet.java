@@ -8,21 +8,19 @@ public class LocationSet {
     private Location[] locationEnd;
 
     /**
-     *
      * @param start starting location
-     * @param ends all the possible points to move to.
+     * @param ends  all the possible points to move to.
      */
     public LocationSet(Location start, Location[] ends) {
         locationStart = start;
         locationEnd = ends;
     }
-    public  LocationSet(Location start)
-    {
+
+    public LocationSet(Location start) {
         this(start, null);
     }
 
-    public LocationSet()
-    {
+    public LocationSet() {
         this(null);
     }
 
@@ -31,8 +29,7 @@ public class LocationSet {
         return locationStart;
     }
 
-    public void setLocationStart(Location l)
-    {
+    public void setLocationStart(Location l) {
         locationStart = l;
     }
 

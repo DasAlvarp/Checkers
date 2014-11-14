@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class PlayerHuman extends Player {
     Scanner scanMan = new Scanner(System.in);
-    public PlayerHuman(char c)
-    {
+
+    public PlayerHuman(char c) {
         super(c);
     }
 
@@ -26,7 +26,7 @@ public class PlayerHuman extends Player {
             l1 = parsingInts();
         }
         Location l2 = parsingInts();
-        while (!canJump(l1, l2,theBoard, c)) {
+        while (!canJump(l1, l2, theBoard, c)) {
             System.out.println("That's not a legal move. Give a legal move.");
             l2 = parsingInts();
         }

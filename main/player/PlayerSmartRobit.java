@@ -9,18 +9,14 @@ import Utils.Square;
 public class PlayerSmartRobit extends Player {
 
 
-
-
     private int depth;
 
-    public PlayerSmartRobit(char c, int x)
-    {
+    public PlayerSmartRobit(char c, int x) {
         super(c);
         depth = x;
     }
 
-    public PlayerSmartRobit(char c)
-    {
+    public PlayerSmartRobit(char c) {
         this(c, 6);
     }
 
@@ -28,10 +24,8 @@ public class PlayerSmartRobit extends Player {
     @Override
     public Square[][] move(Square[][] board, char c) {//default depth...
         Square[][] pureBoard = new Square[8][8];
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 8; y++)
-            {
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
                 pureBoard[x][y] = board[x][y];
             }
         }

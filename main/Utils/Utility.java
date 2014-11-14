@@ -5,7 +5,7 @@ import Utils.LocationManipulation.LocationSet;
 
 /**
  * Created by alvaro on 10/30/14.
- *
+ * <p/>
  * Basically useful functions that I don't know where to put anywhere else.
  */
 public class Utility {

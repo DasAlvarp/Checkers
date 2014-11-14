@@ -4,37 +4,31 @@ import Utils.LocationManipulation.Location;
 import Utils.LocationManipulation.LocationSet;
 import Utils.Square;
 
-public class Player
-{
-	private char player;
-	private String playerName;
+public class Player {
+    private char player;
+    private String playerName;
 
 
-    public Player(char c)
-    {
+    public Player(char c) {
         player = c;
     }
 
 
+    public char getPlayer() {
+        return player;
+    }
 
+    public void setPlayer(char player) {
+        this.player = player;
+    }
 
+    public String getPlayerName() {
+        return playerName;
+    }
 
-	public char getPlayer()
-    {
-		return player;
-	}
-	public void setPlayer(char player)
-    {
-		this.player = player;
-	}
-	public String getPlayerName()
-    {
-		return playerName;
-	}
-	public void setPlayerName(String playerName)
-    {
-		this.playerName = playerName;
-	}
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 
 
     /**
@@ -85,17 +79,13 @@ public class Player
     }
 
 
-    public boolean canMove(Square[][] board, char c)
-    {
+    public boolean canMove(Square[][] board, char c) {
         LocationSet[] legalMoves = legalMoves(board, c);
-        for(int x = 0; x < legalMoves.length; x++)
-        {
+        for (int x = 0; x < legalMoves.length; x++) {
 
 
-            for(int y = 0; y < legalMoves[x].destinationNum(); y++)
-            {
-                if(legalMoves[x].getIndex(y) != null)
-                {
+            for (int y = 0; y < legalMoves[x].destinationNum(); y++) {
+                if (legalMoves[x].getIndex(y) != null) {
                     return true;
                 }
             }
@@ -107,16 +97,12 @@ public class Player
 
 
     //returns location array of all pieces on the board.
-	public Location[] getPieces(Square[][] board, char p)
-    {
+    public Location[] getPieces(Square[][] board, char p) {
         Location[] pieces = new Location[12];
         int count = 0;
-        for(int x = 0; x < 8; x++)
-        {
-            for(int y = 0; y < 8; y++)
-            {
-                if(board[x][y].getPiece() == p)
-                {
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                if (board[x][y].getPiece() == p) {
                     pieces[count] = new Location(x, y);
                     count++;
                 }
@@ -126,8 +112,7 @@ public class Player
 
         Location[] trRet = new Location[count];
 
-        for(int x = 0; x < count; x++)
-        {
+        for (int x = 0; x < count; x++) {
             trRet[x] = pieces[x];
         }
         return trRet;
@@ -135,7 +120,6 @@ public class Player
     }
 
     /**
-     *
      * @param s player playing
      * @return player not playing.
      */
@@ -145,7 +129,6 @@ public class Player
         else
             return '@';
     }
-
 
 
     private int direction(char c)/**
@@ -176,8 +159,7 @@ public class Player
     }
 
 
-    public int getDirection(char c)
-    {
+    public int getDirection(char c) {
         return direction(c);
     }
 
@@ -192,8 +174,7 @@ public class Player
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
 
-        if(second.getX() > 7 || second.getY() > 7 || second.getX() < 0 || second.getY() < 0 )
-        {
+        if (second.getX() > 7 || second.getY() > 7 || second.getX() < 0 || second.getY() < 0) {
             return false;
         }
 
@@ -214,8 +195,7 @@ public class Player
         return false;
     }
 
-	public Square[][] move(Square[][] board, char c)
-    {
+    public Square[][] move(Square[][] board, char c) {
         return board; //you'd better override this method.
     }
 
@@ -230,7 +210,6 @@ public class Player
 
 
     /**
-     *
      * @param theBoard to be edited
      * @return board with properly king'd pieces.
      */
@@ -266,15 +245,11 @@ public class Player
         int dirY = first.getY() - second.getY();
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
-        for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++)
-        {
+        for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
             theBoard = delete(first.getX() - dirX * x, first.getY() - dirY * x, theBoard);
         }
         return theBoard;
     }
-
-
-
 
 
     public Square[][] jumpThings(Location from, Location to, Square[][] board)// jumps over one,
@@ -284,7 +259,6 @@ public class Player
         board = teleport(from, to, board);
         return deleteBetween(from, to, board);
     }
-
 
 
 }
