@@ -3,7 +3,8 @@ package Utils.LocationManipulation;
 /**
  * Created by alvaro on 10/30/14.
  */
-public class LocationSet {
+public class LocationSet
+{
     private Location locationStart;
     private Location[] locationEnd;
 
@@ -11,43 +12,53 @@ public class LocationSet {
      * @param start starting location
      * @param ends  all the possible points to move to.
      */
-    public LocationSet(Location start, Location[] ends) {
+    public LocationSet(Location start, Location[] ends)
+    {
         locationStart = start;
         locationEnd = ends;
     }
 
-    public LocationSet(Location start) {
+    public LocationSet(Location start)
+    {
         this(start, null);
     }
 
-    public LocationSet() {
+    public LocationSet()
+    {
         this(null);
     }
 
 
-    public Location getStart() {
+    public Location getStart()
+    {
         return locationStart;
     }
 
-    public void setLocationStart(Location l) {
+    public void setLocationStart(Location l)
+    {
         locationStart = l;
     }
 
-    public Location getEnd(int x) {
+    public Location getEnd(int x)
+    {
         return locationEnd[x];
     }
 
-    public void addEnd(Location l) {
-        if (locationEnd != null) {
+    public void addEnd(Location l)
+    {
+        if (locationEnd != null)
+        {
             Location[] newEnd = new Location[locationEnd.length + 1];
 
             newEnd[locationEnd.length] = l;
-            for (int x = 0; x < locationEnd.length; x++) {
+            for (int x = 0; x < locationEnd.length; x++)
+            {
                 newEnd[x] = locationEnd[x];
             }
             locationEnd = newEnd;
 
-        } else {
+        } else
+        {
             Location[] newEnd = new Location[1];
             newEnd[0] = l;
             locationEnd = newEnd;
@@ -56,30 +67,39 @@ public class LocationSet {
 
     }
 
-    public Location getIndex(int x) {
+    public Location getIndex(int x)
+    {
         return locationEnd[x];
     }
 
-    public int destinationNum() {
-        if (locationEnd == null || locationEnd.length == 0) {
+    public int destinationNum()
+    {
+        if (locationEnd == null || locationEnd.length == 0)
+        {
             return 0;
-        } else {
+        } else
+        {
             return locationEnd.length;
         }
     }
 
-    public void removeIndex(int i) {
-        if (locationEnd.length > 1) {
+    public void removeIndex(int i)
+    {
+        if (locationEnd.length > 1)
+        {
             Location[] newEnd = new Location[locationEnd.length - 1];
-            for (int x = 0; x < i; x++) {
+            for (int x = 0; x < i; x++)
+            {
                 newEnd[x] = locationEnd[x];
             }
-            for (int x = i; x < locationEnd.length - 1; x++) {
+            for (int x = i; x < locationEnd.length - 1; x++)
+            {
                 newEnd[x] = locationEnd[x + 1];
             }
 
             locationEnd = newEnd;
-        } else {
+        } else
+        {
             locationEnd = null;
         }
     }

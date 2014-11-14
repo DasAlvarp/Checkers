@@ -4,7 +4,8 @@
  */
 package Utils;
 
-public class Square {
+public class Square
+{
 
     String mid;
     char piece; // this way, I could also make chess pieces go here if I wanted
@@ -34,35 +35,44 @@ public class Square {
     {
         k = true;
         if (piece == '@')
+        {
             mid = String.format("%1s %1c %1s", "|", '#', "|");
-        else if (piece == '$')
+        } else if (piece == '$')
+        {
             mid = String.format("%1s %1c %1s", "|", '&', "|");
+        }
 
     }
 
     // Getters and setters. Did not type this.
 
-    public boolean isKing() {
+    public boolean isKing()
+    {
         return k;
     }
 
-    public String getMid() {
+    public String getMid()
+    {
         return mid;
     }
 
-    public void setMid(String mid) {
+    public void setMid(String mid)
+    {
         this.mid = mid;
     }
 
-    public char getPiece() {
+    public char getPiece()
+    {
         return piece;
     }
 
-    public void setPiece(char piece) {
+    public void setPiece(char piece)
+    {
         this.piece = piece;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return mid;
     }
 

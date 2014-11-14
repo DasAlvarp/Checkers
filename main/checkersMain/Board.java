@@ -4,7 +4,8 @@ import Utils.LocationManipulation.Location;
 import Utils.Square;
 import player.Player;
 
-public class Board {
+public class Board
+{
 
     // all the squares.
 
@@ -27,13 +28,13 @@ public class Board {
     protected Square[][] theBoard = new Square[FILE][RANK];
 
 
-    Player p1,
-            p2;
+    Player p1, p2;
 
     protected boolean isRunning = true;
 
 
-    public Board(Player pl1, Player pl2, boolean show) {
+    public Board(Player pl1, Player pl2, boolean show)
+    {
         p1 = pl1;
         p2 = pl2;
         showStuff = show;
@@ -46,16 +47,21 @@ public class Board {
      *          etc...
      */
     {
-        if (timeSinceJump > 50) {
+        if (timeSinceJump > 50)
+        {
             isRunning = false;
         }
-        if (isRunning && ats && dollas) {
+        if (isRunning && ats && dollas)
+        {
             return 0;
-        } else if (!ats) {
+        } else if (!ats)
+        {
             return 1;
-        } else if (!dollas) {
+        } else if (!dollas)
+        {
             return 2;
-        } else {
+        } else
+        {
             return -1;
         }
     }
@@ -67,8 +73,10 @@ public class Board {
         timeSinceJump = 0;
         // getPlayers();
 
-        for (int r = 0; r < FILE; r++) {
-            for (int f = 0; f < RANK; f++) {
+        for (int r = 0; r < FILE; r++)
+        {
+            for (int f = 0; f < RANK; f++)
+            {
                 if ((f + r) % 2 == 1)// checking the color of the square. Not
                 // sure which color, but I can change it
                 // easily.
@@ -106,9 +114,11 @@ public class Board {
     {
         playerTurn += 1;
         playerTurn %= 2;
-        if (playerTurn == 0) {
+        if (playerTurn == 0)
+        {
             playingChar = '$';
-        } else {
+        } else
+        {
             playingChar = '@';
         }
         System.out.println(playerTurn);
@@ -118,8 +128,10 @@ public class Board {
     /**
      * fuction to make both sides do their turn.
      */
-    public void makeMoves() {
-        if (showStuff == true) {
+    public void makeMoves()
+    {
+        if (showStuff == true)
+        {
             System.out.println(toString());
         }
         isRunning = p1.canMove(theBoard, '$');
@@ -127,9 +139,11 @@ public class Board {
         maintenence();
         incrementTurn();
 
-        if (runs() == 0) {
+        if (runs() == 0)
+        {
             maintenence();
-            if (showStuff == true) {
+            if (showStuff == true)
+            {
                 System.out.println(toString());
             }
             isRunning = p2.canMove(theBoard, '@');
@@ -150,9 +164,11 @@ public class Board {
 
         for (int x = 0; x < 8; x++)// kinging.
         {
-            if (theBoard[x][7].getPiece() == '@') {
+            if (theBoard[x][7].getPiece() == '@')
+            {
                 theBoard[x][7].king();
-            } else if (theBoard[x][0].getPiece() == '$') {
+            } else if (theBoard[x][0].getPiece() == '$')
+            {
                 theBoard[x][0].king();
             }
         }
@@ -164,18 +180,23 @@ public class Board {
         atNum = 0;
         boolean at = false;// making sure the game's not over.
         boolean cash = false;
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
 
-                if (theBoard[x][y].getPiece() == '@') {
+                if (theBoard[x][y].getPiece() == '@')
+                {
                     at = true;
                     atNum++;
-                } else if (theBoard[x][y].getPiece() == '$') {
+                } else if (theBoard[x][y].getPiece() == '$')
+                {
                     cash = true;
                     dollaNum++;
                 }
 
-                if (cash && at) {
+                if (cash && at)
+                {
                     x = 8;
                     y = 8;
                 }
@@ -185,9 +206,11 @@ public class Board {
         ats = at;
         dollas = cash;
 
-        if (dollaNum != tempDollas || atNum != tempAts) {
+        if (dollaNum != tempDollas || atNum != tempAts)
+        {
             timeSinceJump = 0;
-        } else {
+        } else
+        {
 
 
             timeSinceJump++;
@@ -231,7 +254,7 @@ public class Board {
 
 
 	/*
-	 * public void getPlayers()//gets the players' names. { Scanner scanMan =
+     * public void getPlayers()//gets the players' names. { Scanner scanMan =
 	 * new Scanner(System.in); System.out.println("What is player 1's name?");
 	 * player1 = scanMan.nextLine();
 	 * System.out.println("What is player 2's name?"); player2 =
@@ -239,7 +262,8 @@ public class Board {
 	 */
 
     // horrible function of painful reading. Read this if you want a headache.
-    public String toString() {
+    public String toString()
+    {
         String theWholeDamnBoard = "";// temporary initialization. Hopefully I
         // remember to delete that one part of
         // it.
@@ -264,8 +288,10 @@ public class Board {
         // I changed it.
 
 
-        for (int y = 0; y < FILE; y++) {
-            for (int x = 0; x < RANK; x++) {
+        for (int y = 0; y < FILE; y++)
+        {
+            for (int x = 0; x < RANK; x++)
+            {
                 theWholeDamnBoard += "|===|";// top thing.
             }
 
@@ -286,12 +312,15 @@ public class Board {
             theWholeDamnBoard += "\n";
         }
 
-        for (int y = 0; y < RANK; y++) {
+        for (int y = 0; y < RANK; y++)
+        {
             theWholeDamnBoard += "|===|";
         }
         theWholeDamnBoard += "\n";
         for (int y = 0; y < RANK; y++)
+        {
             theWholeDamnBoard += String.format("%3d  ", (y + 1));
+        }
         theWholeDamnBoard += "  <--put this number in first.\n";
 
         return theWholeDamnBoard;

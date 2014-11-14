@@ -10,8 +10,10 @@ import java.util.Scanner;
  * @author Alvaro Gudiswitz
  * @version 1.2
  */
-public class CheckersPlayer {
-    public static void main(String args[]) {
+public class CheckersPlayer
+{
+    public static void main(String args[])
+    {
         Player p1;
         Player p2;
 
@@ -32,57 +34,73 @@ public class CheckersPlayer {
         System.out.println("I'm going to be gross and manually figure out everything you want.");
 
         System.out.println("Are you going to be in the game? Y for yes, anything else for no?");
-        if (scanMan.next().equalsIgnoreCase("y")) {
+        if (scanMan.next().equalsIgnoreCase("y"))
+        {
             System.out.println("Do you have are there two humans playing?");
-            if (scanMan.next().equalsIgnoreCase(("y"))) {
+            if (scanMan.next().equalsIgnoreCase(("y")))
+            {
                 p1 = new PlayerHuman('$');
                 p2 = new PlayerHuman('@');
-            } else {
+            } else
+            {
 
                 System.out.println("Do you want to play against an AI?");
-                if (scanMan.next().equalsIgnoreCase("Y")) {
+                if (scanMan.next().equalsIgnoreCase("Y"))
+                {
                     System.out.println("What depth should the computer be?");
                     int deep = scanMan.nextInt();
                     System.out.println("Do you want to be player 1?");
-                    if (scanMan.next().equalsIgnoreCase("Y")) {
+                    if (scanMan.next().equalsIgnoreCase("Y"))
+                    {
                         p1 = new PlayerHuman('$');
                         p2 = new PlayerSmartRobit('@', deep);
-                    } else {
+                    } else
+                    {
                         p2 = new PlayerHuman('@');
                         p1 = new PlayerSmartRobit('$', deep);
                     }
-                } else {
+                } else
+                {
                     System.out.println("Do you want to be player 1?");
-                    if (scanMan.next().equalsIgnoreCase("Y")) {
+                    if (scanMan.next().equalsIgnoreCase("Y"))
+                    {
                         p1 = new PlayerHuman('$');
                         p2 = new PlayerDumRobit('@');
-                    } else {
+                    } else
+                    {
                         p2 = new PlayerHuman('@');
                         p1 = new PlayerDumRobit('$');
                     }
                 }
             }
-        } else {
+        } else
+        {
             System.out.println("What do you want the first AI's (or only) depth to be? If there isn't an AI, plug in your lucky number.");
             int deep = scanMan.nextInt();
             System.out.println("Do you want two smart AI's to play?");
-            if (scanMan.next().equalsIgnoreCase("y")) {
+            if (scanMan.next().equalsIgnoreCase("y"))
+            {
                 p1 = new PlayerSmartRobit('$', deep);
                 System.out.println("What do you want the second AI's depth to be?");
                 deep = scanMan.nextInt();
                 p2 = new PlayerSmartRobit('@', deep);
-            } else {
+            } else
+            {
                 System.out.println("Do you want one smart AI?");
-                if (scanMan.next().equalsIgnoreCase("y")) {
+                if (scanMan.next().equalsIgnoreCase("y"))
+                {
                     System.out.println("Do you want it to be player 1?");
-                    if (scanMan.next().equalsIgnoreCase("y")) {
+                    if (scanMan.next().equalsIgnoreCase("y"))
+                    {
                         p1 = new PlayerSmartRobit('$', deep);
                         p2 = new PlayerDumRobit('@');
-                    } else {
+                    } else
+                    {
                         p1 = new PlayerDumRobit('$');
                         p2 = new PlayerSmartRobit('@', deep);
                     }
-                } else {
+                } else
+                {
                     p1 = new PlayerDumRobit('$');
                     p2 = new PlayerDumRobit('@');
                 }
@@ -90,9 +108,11 @@ public class CheckersPlayer {
         }
 
         System.out.println("Do you want it to show stuff?");
-        if (scanMan.next().equalsIgnoreCase("y")) {
+        if (scanMan.next().equalsIgnoreCase("y"))
+        {
             showThings = true;
-        } else {
+        } else
+        {
             showThings = false;
         }
 
@@ -102,15 +122,19 @@ public class CheckersPlayer {
 
         Board checkers = new Board(p1, p2, showThings);
 
-        for (int x = 0; x < numReps; x++) {
+        for (int x = 0; x < numReps; x++)
+        {
             runs = true;
             checkers.setBoard();
-            while (runs == true) {
+            while (runs == true)
+            {
 
                 checkers.makeMoves();
-                if (checkers.runs() == 0) {
+                if (checkers.runs() == 0)
+                {
                     //stub
-                } else {
+                } else
+                {
                     System.out.println(checkers.runs());
                     runs = false;
                 }

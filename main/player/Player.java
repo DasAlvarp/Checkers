@@ -4,29 +4,35 @@ import Utils.LocationManipulation.Location;
 import Utils.LocationManipulation.LocationSet;
 import Utils.Square;
 
-public class Player {
+public class Player
+{
     private char player;
     private String playerName;
 
 
-    public Player(char c) {
+    public Player(char c)
+    {
         player = c;
     }
 
 
-    public char getPlayer() {
+    public char getPlayer()
+    {
         return player;
     }
 
-    public void setPlayer(char player) {
+    public void setPlayer(char player)
+    {
         this.player = player;
     }
 
-    public String getPlayerName() {
+    public String getPlayerName()
+    {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
+    public void setPlayerName(String playerName)
+    {
         this.playerName = playerName;
     }
 
@@ -34,40 +40,48 @@ public class Player {
     /**
      * @return all legal moves
      */
-    public LocationSet[] legalMoves(Square[][] board, char c) {
+    public LocationSet[] legalMoves(Square[][] board, char c)
+    {
 
         Location[] canMove = getPieces(board, c);
         LocationSet[] destinations = new LocationSet[canMove.length];
 
-//all squares and anywhere they could dream of landing
-        for (int x = 0; x < canMove.length; x++) {
+        //all squares and anywhere they could dream of landing
+        for (int x = 0; x < canMove.length; x++)
+        {
             destinations[x] = new LocationSet(canMove[x], null);
-            for (int d = 0; d < 4; d++) {
-                for (int r = 0; r < 2; r++) {
+            for (int d = 0; d < 4; d++)
+            {
+                for (int r = 0; r < 2; r++)
+                {
                     switch (d) //gets all the possible moves for each one and stores them in the destinations array.
                     {
                         case 0:
                             Location temp = new Location(canMove[x].getX() + r + 1, canMove[x].getY() + r + 1);
-                            if (canJump(destinations[x].getStart(), temp, board, c)) {
+                            if (canJump(destinations[x].getStart(), temp, board, c))
+                            {
                                 destinations[x].addEnd(temp);
 
                             }
                             break;
                         case 1:
                             Location tem = new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1);
-                            if (canJump(destinations[x].getStart(), tem, board, c)) {
+                            if (canJump(destinations[x].getStart(), tem, board, c))
+                            {
                                 destinations[x].addEnd(tem);
                             }
                             break;
                         case 2:
                             Location te = new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1);
-                            if (canJump(destinations[x].getStart(), te, board, c)) {
+                            if (canJump(destinations[x].getStart(), te, board, c))
+                            {
                                 destinations[x].addEnd(te);
                             }
                             break;
                         case 3:
                             Location t = new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1);
-                            if ((canJump(destinations[x].getStart(), t, board, c))) {
+                            if ((canJump(destinations[x].getStart(), t, board, c)))
+                            {
                                 destinations[x].addEnd(t);
                             }
                             break;
@@ -79,13 +93,17 @@ public class Player {
     }
 
 
-    public boolean canMove(Square[][] board, char c) {
+    public boolean canMove(Square[][] board, char c)
+    {
         LocationSet[] legalMoves = legalMoves(board, c);
-        for (int x = 0; x < legalMoves.length; x++) {
+        for (int x = 0; x < legalMoves.length; x++)
+        {
 
 
-            for (int y = 0; y < legalMoves[x].destinationNum(); y++) {
-                if (legalMoves[x].getIndex(y) != null) {
+            for (int y = 0; y < legalMoves[x].destinationNum(); y++)
+            {
+                if (legalMoves[x].getIndex(y) != null)
+                {
                     return true;
                 }
             }
@@ -97,12 +115,16 @@ public class Player {
 
 
     //returns location array of all pieces on the board.
-    public Location[] getPieces(Square[][] board, char p) {
+    public Location[] getPieces(Square[][] board, char p)
+    {
         Location[] pieces = new Location[12];
         int count = 0;
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                if (board[x][y].getPiece() == p) {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                if (board[x][y].getPiece() == p)
+                {
                     pieces[count] = new Location(x, y);
                     count++;
                 }
@@ -112,7 +134,8 @@ public class Player {
 
         Location[] trRet = new Location[count];
 
-        for (int x = 0; x < count; x++) {
+        for (int x = 0; x < count; x++)
+        {
             trRet[x] = pieces[x];
         }
         return trRet;
@@ -123,11 +146,15 @@ public class Player {
      * @param s player playing
      * @return player not playing.
      */
-    public char notPlaying(char s) {
+    public char notPlaying(char s)
+    {
         if (s == '@')
+        {
             return '$';
-        else
+        } else
+        {
             return '@';
+        }
     }
 
 
@@ -137,9 +164,12 @@ public class Player {
      */
     {
         if (c == '@')
+        {
             return 1;
-        else
+        } else
+        {
             return -1;
+        }
     }
 
     public int pieces(char c, Square[][] theBoard)/**
@@ -148,9 +178,12 @@ public class Player {
      */
     {
         int count = 0;
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                if (theBoard[x][y].getPiece() == c) {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                if (theBoard[x][y].getPiece() == c)
+                {
                     count++;
                 }
             }
@@ -159,7 +192,8 @@ public class Player {
     }
 
 
-    public int getDirection(char c) {
+    public int getDirection(char c)
+    {
         return direction(c);
     }
 
@@ -174,20 +208,25 @@ public class Player {
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
 
-        if (second.getX() > 7 || second.getY() > 7 || second.getX() < 0 || second.getY() < 0) {
+        if (second.getX() > 7 || second.getY() > 7 || second.getX() < 0 || second.getY() < 0)
+        {
             return false;
         }
 
-        if (theBoard[first.getX()][first.getY()].isKing() || dirY == direction(playingChar)) {
-            if (Math.abs(first.getX() - second.getX()) < 4
-                    && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY())) {
+        if (theBoard[first.getX()][first.getY()].isKing() || dirY == direction(playingChar))
+        {
+            if (Math.abs(first.getX() - second.getX()) < 4 && Math.abs(first.getX() - second.getX()) == Math.abs(first.getY() - second.getY()))
+            {
 
-                for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
-                    if (theBoard[first.getX() + dirX * x][first.getY() + dirY * x].getPiece() != notPlaying(playingChar)) {
+                for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++)
+                {
+                    if (theBoard[first.getX() + dirX * x][first.getY() + dirY * x].getPiece() != notPlaying(playingChar))
+                    {
                         return false;
                     }
                 }
-                if (theBoard[second.getX()][second.getY()].getPiece() == ' ') {
+                if (theBoard[second.getX()][second.getY()].getPiece() == ' ')
+                {
                     return true;
                 }
             }
@@ -195,7 +234,8 @@ public class Player {
         return false;
     }
 
-    public Square[][] move(Square[][] board, char c) {
+    public Square[][] move(Square[][] board, char c)
+    {
         return board; //you'd better override this method.
     }
 
@@ -213,12 +253,15 @@ public class Player {
      * @param theBoard to be edited
      * @return board with properly king'd pieces.
      */
-    public Square[][] kinging(Square[][] theBoard) {
+    public Square[][] kinging(Square[][] theBoard)
+    {
         for (int x = 0; x < 8; x++)// kinging.
         {
-            if (theBoard[x][7].getPiece() == '@') {
+            if (theBoard[x][7].getPiece() == '@')
+            {
                 theBoard[x][7].king();
-            } else if (theBoard[x][0].getPiece() == '$') {
+            } else if (theBoard[x][0].getPiece() == '$')
+            {
                 theBoard[x][0].king();
             }
         }
@@ -245,7 +288,8 @@ public class Player {
         int dirY = first.getY() - second.getY();
         dirX = dirX / Math.abs(dirX);
         dirY = dirY / Math.abs(dirY);
-        for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++) {
+        for (int x = 1; x < Math.abs(second.getX() - first.getX()); x++)
+        {
             theBoard = delete(first.getX() - dirX * x, first.getY() - dirY * x, theBoard);
         }
         return theBoard;

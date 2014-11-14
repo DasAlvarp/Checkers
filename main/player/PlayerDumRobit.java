@@ -13,7 +13,8 @@ import java.util.Random;
 public class PlayerDumRobit extends Player
 
 {
-    public PlayerDumRobit(char c) {
+    public PlayerDumRobit(char c)
+    {
         super(c);
     }
 
@@ -21,7 +22,8 @@ public class PlayerDumRobit extends Player
     Utility use = new Utility();
 
     @Override
-    public Square[][] move(Square[][] Board, char c) {
+    public Square[][] move(Square[][] Board, char c)
+    {
 
         Square[][] bEdit = Board;
 
@@ -30,10 +32,13 @@ public class PlayerDumRobit extends Player
         LocationSet[] destinations = new LocationSet[canMove.length];
 
 
-        for (int x = 0; x < canMove.length; x++) {
+        for (int x = 0; x < canMove.length; x++)
+        {
             destinations[x] = new LocationSet(canMove[x], null);
-            for (int d = 0; d < 4; d++) {
-                for (int r = 0; r < 2; r++) {
+            for (int d = 0; d < 4; d++)
+            {
+                for (int r = 0; r < 2; r++)
+                {
 
                     switch (d) //gets all the possible moves for each one and stores them in the destinations array.
                     {
@@ -55,17 +60,23 @@ public class PlayerDumRobit extends Player
         }
 
         Boolean hasMoved = false;
-        while (destinations != null) {
+        while (destinations != null)
+        {
             int starts = 0;
             if (destinations.length > 1)
+            {
                 starts = randy.nextInt(destinations.length);
+            }
 
-            while (destinations[starts].destinationNum() > 0) {
+            while (destinations[starts].destinationNum() > 0)
+            {
                 int index = randy.nextInt(destinations[starts].destinationNum());
 
-                if (canJump(destinations[starts].getStart(), destinations[starts].getIndex(index), bEdit, c)) {
+                if (canJump(destinations[starts].getStart(), destinations[starts].getIndex(index), bEdit, c))
+                {
                     return jumpThings(destinations[starts].getStart(), destinations[starts].getIndex(index), bEdit);
-                } else {
+                } else
+                {
                     destinations[starts].removeIndex(index);
                 }
             }
