@@ -3,6 +3,7 @@ package checkersMain;
 import Utils.LocationManipulation.Location;
 import Utils.Square;
 import player.Player;
+import player.PlayerDumRobit;
 
 public class Board
 {
@@ -16,6 +17,8 @@ public class Board
 
     int atNum;
     int dollaNum;
+
+    private int moveMax = 500;
 
     protected int timeSinceJump = 0;// for 5k move without capture draw rule.
 
@@ -37,6 +40,21 @@ public class Board
     {
         p1 = pl1;
         p2 = pl2;
+
+
+        int dum = 0;
+        if(p1.isDum())
+        {
+            dum++;
+        }
+        if(p2.isDum())
+        {
+            dum++;
+        }
+
+        moveMax = 100 + 200 * dum;
+
+
         showStuff = show;
     }
 
@@ -47,7 +65,7 @@ public class Board
      *          etc...
      */
     {
-        if (timeSinceJump > 50)
+        if (timeSinceJump > 500)
         {
             isRunning = false;
         }
@@ -121,7 +139,6 @@ public class Board
         {
             playingChar = '@';
         }
-        System.out.println(playerTurn);
     }
 
 

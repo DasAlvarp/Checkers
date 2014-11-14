@@ -13,6 +13,11 @@ import java.util.Random;
 public class PlayerDumRobit extends Player
 
 {
+    public boolean isDum()
+    {
+        return true;
+    }
+
     public PlayerDumRobit(char c)
     {
         super(c);
@@ -28,7 +33,6 @@ public class PlayerDumRobit extends Player
         Square[][] bEdit = Board;
 
         Location[] canMove = getPieces(Board, c);
-        System.out.println(canMove.length);
         LocationSet[] destinations = new LocationSet[canMove.length];
 
 

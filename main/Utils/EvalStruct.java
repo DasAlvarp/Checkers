@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class EvalStruct
 {
+
     public double getEval()
     {
         return eval;
@@ -77,8 +78,6 @@ public class EvalStruct
     private Location[] moveCoords;
 
 
-    Random randy = new Random();
-    Utility use = new Utility();
     Player p;
 
 
@@ -148,7 +147,14 @@ public class EvalStruct
         // System.out.println("Making evaluation structure. Depth: " + deep);
         p = new Player(c);
         this.depth = deep;
-        this.boardState = board;
+        this.boardState = new Square[8][8];
+        for(int x = 0; x < 8; x++)
+        {
+            for(int y = 0; y < 8; y++)
+            {
+                boardState[x][y] = board[x][y];
+            }
+        }
         this.player = c;
 
 
@@ -164,7 +170,7 @@ public class EvalStruct
                     Location[] moves = new Location[2];
                     moves[0] = legalMoves[x].getStart();
                     moves[1] = legalMoves[x].getIndex(y);
-                    this.otherEvals.add(new EvalStruct(deep - 1, (p.jumpThings(moves[0], moves[1], board)), p.notPlaying(c)));
+                    this.otherEvals.add(new EvalStruct(deep - 1, (p.jumpThings(moves[0], moves[1], boardState)), p.notPlaying(c)));
                     moveList.add(moves);
                 }
 
@@ -221,6 +227,13 @@ public class EvalStruct
      */
     public double evaluate(Square[][] board, char c)
     {
+        for(int x = 0; x < 8; x++)
+        {
+            for(int y = 0; y < 8; y++)
+            {
+                board[x][y] = board[x][y];//this fixes strange issues for some reason. Programming is strange.
+            }
+        }
         double score = 0;
         /*
         so this function evaluates a positoin. It starts with material, counting a king as 3 normal pieces, as well as calculating the forward-ness of each of the pieces.

@@ -122,6 +122,9 @@ public class CheckersPlayer
 
         Board checkers = new Board(p1, p2, showThings);
 
+        int p1Win = 0;
+        int p2Win = 0;
+        int draw = 0;
         for (int x = 0; x < numReps; x++)
         {
             runs = true;
@@ -135,9 +138,28 @@ public class CheckersPlayer
                     //stub
                 } else
                 {
-                    System.out.println(checkers.runs());
+                    System.out.println("Game " + (x + 1) + " completed.");
                     runs = false;
+                    switch (checkers.runs())
+                    {
+                        case 0:
+                            //stub
+                        case 1:
+                            p1Win++;
+                            break;
+                        case 2:
+                            p2Win++;
+                            break;
+
+                        default:
+                            draw++;
+                    }
+
+
                 }
+
+
+            }
 /*			String in = scanMan.nextLine();
             Scanner inScan = new Scanner(in);
 			inScan.useDelimiter(" ");
@@ -170,13 +192,12 @@ public class CheckersPlayer
 
 			inScan.close();
 */
-            }
-
-            // it's 3 AM and I'm listenign to 3AM. I'm proud of this really good
-            // playlist timing.
         }
 
-    }
+        // it's 3 AM and I'm listenign to 3AM. I'm proud of this really good
+        // playlist timing.
 
+        System.out.println("P1 wins: " + p1Win + "\n P2 wins: " + p2Win + "\nDraws: " + draw);
+    }
 
 }

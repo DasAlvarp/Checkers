@@ -23,7 +23,10 @@ public class PlayerSmartRobit extends Player
         this(c, 6);
     }
 
-
+    public boolean isDum()
+    {
+        return false;
+    }
     @Override
     public Square[][] move(Square[][] board, char c)
     {//default depth...

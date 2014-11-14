@@ -113,6 +113,11 @@ public class Player
 
     }
 
+    public boolean isDum()
+    {
+        return false;
+    }
+
 
     //returns location array of all pieces on the board.
     public Location[] getPieces(Square[][] board, char p)
