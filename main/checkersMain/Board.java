@@ -117,15 +117,15 @@ public class Board {
      */
     public void makeMoves()
     {
-        if(showStuff) {
+        if(showStuff == true) {
             System.out.println(toString());
         }
-            theBoard = p1.move(theBoard, '$');
+        theBoard = p1.move(theBoard, '$');
         maintenence();
         incrementTurn();
         if(runs() == 0) {
             maintenence();
-            if(showStuff) {
+           if(showStuff == true) {
                 System.out.println(toString());
             }
             theBoard = p2.move(theBoard, '@');

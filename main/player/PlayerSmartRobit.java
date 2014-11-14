@@ -11,6 +11,19 @@ public class PlayerSmartRobit extends Player {
 
 
 
+    private int depth;
+
+    public PlayerSmartRobit(int x)
+    {
+        super();
+        depth = x;
+    }
+
+    public PlayerSmartRobit()
+    {
+        this(6);
+    }
+
 
     @Override
     public Square[][] move(Square[][] board, char c) {//default depth...
@@ -24,7 +37,7 @@ public class PlayerSmartRobit extends Player {
         }
 
 
-        EvalStruct main = new EvalStruct(6, board, c);
+        EvalStruct main = new EvalStruct(depth, board, c);
 
         //System.out.println(main.getEval());
 

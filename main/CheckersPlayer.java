@@ -42,15 +42,18 @@ public class CheckersPlayer {
             }
             else
             {
+
                 System.out.println("Do you want to play against an AI?");
                 if(scanMan.next().equalsIgnoreCase("Y")) {
+                    System.out.println("What depth should the computer be?");
+                    int deep = scanMan.nextInt();
                     System.out.println("Do you want to be player 1?");
                     if (scanMan.next().equalsIgnoreCase("Y")) {
                         p1 = new PlayerHuman();
-                        p2 = new PlayerSmartRobit();
+                        p2 = new PlayerSmartRobit(deep);
                     } else {
                         p2 = new PlayerHuman();
-                        p1 = new PlayerSmartRobit();
+                        p1 = new PlayerSmartRobit(deep);
                     }
                 }
                 else {
@@ -67,11 +70,15 @@ public class CheckersPlayer {
         }
         else
         {
+            System.out.println("What do you want the first AI's (or only) depth to be? If there isn't an AI, plug in your lucky number.");
+            int deep = scanMan.nextInt();
             System.out.println("Do you want two smart AI's to play?");
             if(scanMan.next().equalsIgnoreCase("y"))
             {
-                p1 = new PlayerSmartRobit();
-                p2 = new PlayerSmartRobit();
+                p1 = new PlayerSmartRobit(deep);
+                System.out.println("What do you want the second AI's depth to be?");
+                deep = scanMan.nextInt();
+                p2 = new PlayerSmartRobit(deep);
             }
             else
             {
@@ -81,13 +88,13 @@ public class CheckersPlayer {
                     System.out.println("Do you want it to be player 1?");
                     if(scanMan.next().equalsIgnoreCase("y"))
                     {
-                        p1 = new PlayerSmartRobit();
+                        p1 = new PlayerSmartRobit(deep);
                         p2 = new PlayerDumRobit();
                     }
                     else
                     {
                         p1 = new PlayerDumRobit();
-                        p2 = new PlayerSmartRobit();
+                        p2 = new PlayerSmartRobit(deep);
                     }
                 }
                 else
@@ -109,7 +116,7 @@ public class CheckersPlayer {
         }
 
         System.out.println("how many games do you want to play?");
-        numReps = scanMan.nextInt() - 1;
+        numReps = scanMan.nextInt();
 
 
 
