@@ -67,13 +67,10 @@ public class EvalStruct {
 
     Random randy = new Random();
     Utility use = new Utility();
-    Player p = new Player();
-
-
+    Player p;
 
 
     /**
-     *
      * @return all legal moves
      */
     public LocationSet[] legalMoves(Square[][] board, char c) {
@@ -121,14 +118,14 @@ public class EvalStruct {
     }
 
 
-
     /**
      * @param deep-depth    of recursion..
      * @param board-board   state to be messed with..
      * @param c-perspective of person to move.
      */
     public EvalStruct(int deep, Square[][] board, char c) {
-       // System.out.println("Making evaluation structure. Depth: " + deep);
+        // System.out.println("Making evaluation structure. Depth: " + deep);
+        p = new Player(c);
         this.depth = deep;
         this.boardState = board;
         this.player = c;
@@ -153,29 +150,24 @@ public class EvalStruct {
 
 
         if (this.depth == 0) {
-            eval = -1 * evaluate(boardState, c);
+            eval = evaluate(boardState, c);
             this.bestMove = boardState;
 
-        }
-        else
-        {
-            if(otherEvals == null || otherEvals.size() == 0)
-            {
-                eval = -1 * evaluate(boardState, c);
+        } else {
+            if (otherEvals == null || otherEvals.size() == 0) {
+                eval = evaluate(boardState, c);
                 this.bestMove = boardState;
 
-            }
-            else
-            {
-                eval = otherEvals.get(0).getEval();
-              //  System.out.println("Eval is: " + eval);
+            } else {
+                eval =-1 *  otherEvals.get(0).getEval();
+                //  System.out.println("Eval is: " + eval);
                 this.bestMove = otherEvals.get(0).boardState;
                 this.moveCoords = moveList.get(0);
                 for (int x = 1; x < otherEvals.size(); x++) {
-                    if (otherEvals.get(x).eval > eval) {
-                        eval = otherEvals.get(x).getEval();
+                    if (-1 * otherEvals.get(x).eval > eval) {
+                        eval = -1 * otherEvals.get(x).getEval();
                         bestMove = otherEvals.get(x).boardState;
-                       // System.out.println("Eval is: " + eval);
+                        // System.out.println("Eval is: " + eval);
                         this.moveCoords = moveList.get(x);
 
                     }
@@ -186,11 +178,9 @@ public class EvalStruct {
     }
 
 
-    public Location[] getMoveCoords()
-    {
+    public Location[] getMoveCoords() {
         return moveCoords;
     }
-
 
 
     /**
@@ -218,14 +208,22 @@ public class EvalStruct {
 
         Location[] myPieces = p.getPieces(board, c);
 
-        if (p.getDirection(c) == 1) {
+       if (p.getDirection(c) == 1) {
 
             for (int x = 0; x < myPieces.length; x++) {
-                score += (double) myPieces[x].getY() / 8;
+                if (!board[myPieces[x].getX()][myPieces[x].getY()].isKing()) {
+                    //score += (double) myPieces[x].getY() / 8;
+                }
+                else
+                    score += 3;
             }
         } else {
             for (int x = 0; x < myPieces.length; x++) {
-                score += (double) (8 - myPieces[x].getY()) / 8;
+                if (!board[myPieces[x].getX()][myPieces[x].getY()].isKing()) {
+                    //score += (double) myPieces[x].getY() / 8;
+                }
+                else
+                    score += 3;
             }
         }
 
@@ -235,13 +233,22 @@ public class EvalStruct {
         if (p.getDirection(c) == 1) {
 
             for (int x = 0; x < notMyPieces.length; x++) {
-                score -= (double) notMyPieces[x].getY() / 8;
+                if (!board[notMyPieces[x].getX()][notMyPieces[x].getY()].isKing()) {
+                    //score -= (double) notMyPieces[x].getY() / 8;
+                }
+                else score -= 3;
             }
         } else {
             for (int x = 0; x < notMyPieces.length; x++) {
-                score -= (double) (8 - notMyPieces[x].getY()) / 8;
+                if (!board[notMyPieces[x].getX()][notMyPieces[x].getY()].isKing()) {
+                    //score -= (double) notMyPieces[x].getY() / 8;
+                }
+                else
+                    score -= 3;
             }
         }
-        return score;
+
+
+        return 0-score;
     }
 }

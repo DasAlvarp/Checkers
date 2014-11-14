@@ -1,6 +1,7 @@
 package player;
 
 import Utils.LocationManipulation.Location;
+import Utils.LocationManipulation.LocationSet;
 import Utils.Square;
 
 public class Player
@@ -8,6 +9,11 @@ public class Player
 	private char player;
 	private String playerName;
 
+
+    public Player(char c)
+    {
+        player = c;
+    }
 
 
 
@@ -30,6 +36,74 @@ public class Player
 		this.playerName = playerName;
 	}
 
+
+    /**
+     * @return all legal moves
+     */
+    public LocationSet[] legalMoves(Square[][] board, char c) {
+
+        Location[] canMove = getPieces(board, c);
+        LocationSet[] destinations = new LocationSet[canMove.length];
+
+//all squares and anywhere they could dream of landing
+        for (int x = 0; x < canMove.length; x++) {
+            destinations[x] = new LocationSet(canMove[x], null);
+            for (int d = 0; d < 4; d++) {
+                for (int r = 0; r < 2; r++) {
+                    switch (d) //gets all the possible moves for each one and stores them in the destinations array.
+                    {
+                        case 0:
+                            Location temp = new Location(canMove[x].getX() + r + 1, canMove[x].getY() + r + 1);
+                            if (canJump(destinations[x].getStart(), temp, board, c)) {
+                                destinations[x].addEnd(temp);
+
+                            }
+                            break;
+                        case 1:
+                            Location tem = new Location(canMove[x].getX() + r + 1, canMove[x].getY() - r - 1);
+                            if (canJump(destinations[x].getStart(), tem, board, c)) {
+                                destinations[x].addEnd(tem);
+                            }
+                            break;
+                        case 2:
+                            Location te = new Location(canMove[x].getX() - r - 1, canMove[x].getY() + r + 1);
+                            if (canJump(destinations[x].getStart(), te, board, c)) {
+                                destinations[x].addEnd(te);
+                            }
+                            break;
+                        case 3:
+                            Location t = new Location(canMove[x].getX() - r - 1, canMove[x].getY() - r - 1);
+                            if ((canJump(destinations[x].getStart(), t, board, c))) {
+                                destinations[x].addEnd(t);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        return destinations;
+    }
+
+
+    public boolean canMove(Square[][] board, char c)
+    {
+        LocationSet[] legalMoves = legalMoves(board, c);
+        for(int x = 0; x < legalMoves.length; x++)
+        {
+
+
+            for(int y = 0; y < legalMoves[x].destinationNum(); y++)
+            {
+                if(legalMoves[x].getIndex(y) != null)
+                {
+                    return true;
+                }
+            }
+        }
+        System.out.println("nope.");
+        return false;
+
+    }
 
 
     //returns location array of all pieces on the board.

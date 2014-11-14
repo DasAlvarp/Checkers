@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 public class PlayerHuman extends Player {
     Scanner scanMan = new Scanner(System.in);
+    public PlayerHuman(char c)
+    {
+        super(c);
+    }
+
 
     private Location parsingInts() {
         //	/** @returns array of four text inputs. */

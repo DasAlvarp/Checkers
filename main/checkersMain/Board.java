@@ -13,11 +13,13 @@ public class Board {
 	boolean ats = true;// if there are ats or dollars left.
 	boolean dollas = true;
 
+    int atNum;
+    int dollaNum;
+
 	protected int timeSinceJump = 0;// for 5k move without capture draw rule.
 
 	static int RANK = 8;
 	static int FILE = 8;
-	private String[] playerNames = new String[2];
 	protected char playingChar = '$';
 
 	private int playerTurn = 0;
@@ -46,6 +48,10 @@ public class Board {
 	 *          etc...
 	 */
 	{
+        if(timeSinceJump > 50)
+        {
+            isRunning = false;
+        }
 		if (isRunning && ats && dollas) {
 			return 0;
 		} else if (!ats) {
@@ -120,14 +126,18 @@ public class Board {
         if(showStuff == true) {
             System.out.println(toString());
         }
+        isRunning = p1.canMove(theBoard, '$');
         theBoard = p1.move(theBoard, '$');
         maintenence();
         incrementTurn();
+
         if(runs() == 0) {
             maintenence();
            if(showStuff == true) {
                 System.out.println(toString());
             }
+            isRunning = p2.canMove(theBoard, '@');
+
             theBoard = p2.move(theBoard, '@');
             incrementTurn();
             maintenence();
@@ -144,10 +154,7 @@ public class Board {
 	public void maintenence()// well, kind of what it sounds like. Kings pieces,
 								// checks for draws, etc...
 	{
-		if (timeSinceJump > 500)// 500 move draw rule.
-		{
-			isRunning = false;
-		}
+
 		for (int x = 0; x < 8; x++)// kinging.
 		{
 			if (theBoard[x][7].getPiece() == '@') {
@@ -157,15 +164,24 @@ public class Board {
 			}
 		}
 
+        int tempDollas = dollaNum;
+        int tempAts = atNum;
+
+        dollaNum = 0;
+        atNum = 0;
 		boolean at = false;// making sure the game's not over.
 		boolean cash = false;
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 
-				if (theBoard[x][y].getPiece() == '@')
-					at = true;
-				else if (theBoard[x][y].getPiece() == '$')
-					cash = true;
+				if (theBoard[x][y].getPiece() == '@') {
+                    at = true;
+                    atNum++;
+                }
+				else if (theBoard[x][y].getPiece() == '$') {
+                    cash = true;
+                    dollaNum++;
+                }
 
 				if (cash && at) {
 					x = 8;
@@ -176,7 +192,18 @@ public class Board {
 		}
 		ats = at;
 		dollas = cash;
-	}
+
+        if(dollaNum != tempDollas || atNum != tempAts)
+        {
+            timeSinceJump = 0;
+        }
+        else {
+
+
+            timeSinceJump++;
+        }
+
+    }
 
 
 

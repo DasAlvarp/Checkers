@@ -13,15 +13,15 @@ public class PlayerSmartRobit extends Player {
 
     private int depth;
 
-    public PlayerSmartRobit(int x)
+    public PlayerSmartRobit(char c, int x)
     {
-        super();
+        super(c);
         depth = x;
     }
 
-    public PlayerSmartRobit()
+    public PlayerSmartRobit(char c)
     {
-        this(6);
+        this(c, 6);
     }
 
 

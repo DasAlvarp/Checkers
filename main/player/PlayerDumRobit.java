@@ -13,6 +13,10 @@ import java.util.Random;
 public class PlayerDumRobit extends Player
 
 {
+    public PlayerDumRobit(char c)
+    {
+        super(c);
+    }
     Random randy = new Random();
     Utility use = new Utility();
 
