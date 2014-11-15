@@ -69,6 +69,23 @@ public class Board
         {
             isRunning = false;
         }
+
+        if(isRunning == false)
+        {
+            if(atNum - dollaNum == 0)
+            {
+                return -1;
+            }
+            else if(atNum > dollaNum)
+            {
+                return 2;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
         if (isRunning && ats && dollas)
         {
             return 0;
@@ -155,6 +172,8 @@ public class Board
         theBoard = p1.move(theBoard, '$');
         maintenence();
         incrementTurn();
+       // System.out.println(timeSinceJump);
+        isRunning = p2.canMove(theBoard, '@');
 
         if (runs() == 0)
         {
@@ -210,12 +229,6 @@ public class Board
                 {
                     cash = true;
                     dollaNum++;
-                }
-
-                if (cash && at)
-                {
-                    x = 8;
-                    y = 8;
                 }
 
             }

@@ -25,8 +25,9 @@ public class PlayerSmartRobit extends Player
 
     public boolean isDum()
     {
-        return false;
+        return true;
     }
+
     @Override
     public Square[][] move(Square[][] board, char c)
     {//default depth...
@@ -44,7 +45,7 @@ public class PlayerSmartRobit extends Player
 
         //System.out.println(main.getEval());
 
-        System.out.println(main.getMoveCoords()[0] + ", " + main.getMoveCoords()[1]);
+        //System.out.println(main.getMoveCoords()[0] + ", " + main.getMoveCoords()[1]);
 
         return jumpThings(main.getMoveCoords()[0], main.getMoveCoords()[1], pureBoard);
     }

@@ -33,6 +33,7 @@ public class CheckersPlayer
 
         System.out.println("I'm going to be gross and manually figure out everything you want.");
 
+
         System.out.println("Are you going to be in the game? Y for yes, anything else for no?");
         if (scanMan.next().equalsIgnoreCase("y"))
         {
@@ -47,7 +48,7 @@ public class CheckersPlayer
                 System.out.println("Do you want to play against an AI?");
                 if (scanMan.next().equalsIgnoreCase("Y"))
                 {
-                    System.out.println("What depth should the computer be?");
+                    System.out.println("What ply should the computer be? Please keep in mind that even plys try to make bad moves, due to code and stuff.");
                     int deep = scanMan.nextInt();
                     System.out.println("Do you want to be player 1?");
                     if (scanMan.next().equalsIgnoreCase("Y"))
@@ -81,7 +82,7 @@ public class CheckersPlayer
             if (scanMan.next().equalsIgnoreCase("y"))
             {
                 p1 = new PlayerSmartRobit('$', deep);
-                System.out.println("What do you want the second AI's depth to be?");
+                System.out.println("What do you want the second AI's ply to be?");
                 deep = scanMan.nextInt();
                 p2 = new PlayerSmartRobit('@', deep);
             } else
@@ -138,7 +139,8 @@ public class CheckersPlayer
                     //stub
                 } else
                 {
-                    System.out.println("Game " + (x + 1) + " completed.");
+                    System.out.println(checkers);
+                    System.out.print("Game " + (x + 1) + " completed.");
                     runs = false;
                     switch (checkers.runs())
                     {
@@ -146,12 +148,15 @@ public class CheckersPlayer
                             //stub
                         case 1:
                             p1Win++;
+                            System.out.print(" P1 win \n");
                             break;
                         case 2:
                             p2Win++;
+                            System.out.print(" P2 win \n");
                             break;
 
                         default:
+                            System.out.print(" Draw! \n");
                             draw++;
                     }
 
