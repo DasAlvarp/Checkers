@@ -15,8 +15,8 @@ public class Board
     boolean ats = true;// if there are ats or dollars left.
     boolean dollas = true;
 
-    int atNum;
-    int dollaNum;
+    public int atNum;
+    public int dollaNum;
 
     private int moveMax = 500;
 
@@ -78,10 +78,12 @@ public class Board
             }
             else if(atNum > dollaNum)
             {
+                System.out.println("@:" + atNum);
                 return 2;
             }
             else
             {
+                System.out.println("$:" + dollaNum);
                 return 1;
             }
         }
@@ -91,9 +93,12 @@ public class Board
             return 0;
         } else if (!ats)
         {
+            System.out.println("$:" + dollaNum);
+
             return 1;
         } else if (!dollas)
         {
+            System.out.println("@:" + atNum);
             return 2;
         } else
         {
@@ -177,12 +182,10 @@ public class Board
 
         if (runs() == 0)
         {
-            maintenence();
             if (showStuff == true)
             {
                 System.out.println(toString());
             }
-            isRunning = p2.canMove(theBoard, '@');
 
             theBoard = p2.move(theBoard, '@');
             incrementTurn();

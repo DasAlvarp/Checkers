@@ -123,9 +123,15 @@ public class CheckersPlayer
 
         Board checkers = new Board(p1, p2, showThings);
 
+        int[] diffs = new int[25];
         int p1Win = 0;
         int p2Win = 0;
         int draw = 0;
+
+        for(int x = 0; x < 25; x++)
+        {
+            diffs[x]=0;
+        }
         for (int x = 0; x < numReps; x++)
         {
             runs = true;
@@ -139,9 +145,10 @@ public class CheckersPlayer
                     //stub
                 } else
                 {
-                    System.out.println(checkers);
+                   // System.out.println(checkers);
                     System.out.print("Game " + (x + 1) + " completed.");
                     runs = false;
+                    diffs[13 + checkers.dollaNum-checkers.atNum]++;
                     switch (checkers.runs())
                     {
                         case 0:
@@ -158,6 +165,7 @@ public class CheckersPlayer
                         default:
                             System.out.print(" Draw! \n");
                             draw++;
+                        break;
                     }
 
 
@@ -203,6 +211,15 @@ public class CheckersPlayer
         // playlist timing.
 
         System.out.println("P1 wins: " + p1Win + "\n P2 wins: " + p2Win + "\nDraws: " + draw);
+        for (int x = 0; x < 25; x++)
+        {
+            System.out.printf("%1s %4s %1s", "|", "" + (x - 12), "|");
+        }
+        System.out.println();
+        for (int x = 0; x < 25; x++)
+        {
+            System.out.printf("%1s %4s %1s", "|", "" + diffs[x], "|");
+        }
     }
 
 }

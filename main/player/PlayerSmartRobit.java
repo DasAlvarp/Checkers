@@ -11,11 +11,17 @@ public class PlayerSmartRobit extends Player
 
 
     private int depth;
+    private boolean even = true;
+
 
     public PlayerSmartRobit(char c, int x)
     {
         super(c);
         depth = x;
+        if(x%2==0)
+        {
+            even = false;
+        }
     }
 
     public PlayerSmartRobit(char c)
@@ -41,7 +47,7 @@ public class PlayerSmartRobit extends Player
         }
 
 
-        EvalStruct main = new EvalStruct(depth, board, c);
+        EvalStruct main = new EvalStruct(depth, board, c, even);
 
         //System.out.println(main.getEval());
 

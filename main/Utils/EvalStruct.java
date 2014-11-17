@@ -142,7 +142,7 @@ public class EvalStruct
      * @param board-board   state to be messed with..
      * @param c-perspective of person to move.
      */
-    public EvalStruct(int deep, Square[][] board, char c)
+    public EvalStruct(int deep, Square[][] board, char c, boolean even)
     {
         // System.out.println("Making evaluation structure. Depth: " + deep);
         p = new Player(c);
@@ -170,7 +170,7 @@ public class EvalStruct
                     Location[] moves = new Location[2];
                     moves[0] = legalMoves[x].getStart();
                     moves[1] = legalMoves[x].getIndex(y);
-                    this.otherEvals.add(new EvalStruct(deep - 1, (p.jumpThings(moves[0], moves[1], boardState)), p.notPlaying(c)));
+                    this.otherEvals.add(new EvalStruct(deep - 1, (p.jumpThings(moves[0], moves[1], boardState)), p.notPlaying(c), even));
                     moveList.add(moves);
                 }
 
@@ -181,14 +181,14 @@ public class EvalStruct
 
         if (this.depth == 0)
         {
-            eval = evaluate(boardState, c);
+            eval = evaluate(boardState, c, even);
             this.bestMove = boardState;
 
         } else
         {
             if (otherEvals == null || otherEvals.size() == 0)
             {
-                eval = evaluate(boardState, c);
+                eval = evaluate(boardState, c, even);
                 this.bestMove = boardState;
 
             } else
@@ -225,7 +225,7 @@ public class EvalStruct
      * @param c     character of player
      * @returns evaluation of a board state...
      */
-    public double evaluate(Square[][] board, char c)
+    public double evaluate(Square[][] board, char c, boolean even)
     {
         for(int x = 0; x < 8; x++)
         {
@@ -243,14 +243,14 @@ public class EvalStruct
 
         if (score == 0)
         {
-            return -100;
+            score = -100;
         }
 
         score -= p.pieces(p.notPlaying(c), board);
 
         if (p.pieces(p.notPlaying(c), board) == 0)
         {
-            return 100;
+            score = 100;
         }
 
         Location[] myPieces = p.getPieces(board, c);
@@ -313,6 +313,10 @@ public class EvalStruct
         }
 
 
-        return 0 - score;
+        if(even == true)
+        {
+            return 0- score;
+        }
+        return score;
     }
 }

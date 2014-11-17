@@ -108,7 +108,6 @@ public class Player
                 }
             }
         }
-        System.out.println("nope.");
         return false;
 
     }
