@@ -148,7 +148,7 @@ public class CheckersPlayer
                    // System.out.println(checkers);
                     System.out.print("Game " + (x + 1) + " completed.");
                     runs = false;
-                    diffs[13 + checkers.dollaNum-checkers.atNum]++;
+                    diffs[12 + checkers.dollaNum-checkers.atNum]++;
                     switch (checkers.runs())
                     {
                         case 0:

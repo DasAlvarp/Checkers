@@ -78,12 +78,10 @@ public class Board
             }
             else if(atNum > dollaNum)
             {
-                System.out.println("@:" + atNum);
                 return 2;
             }
             else
             {
-                System.out.println("$:" + dollaNum);
                 return 1;
             }
         }
@@ -93,12 +91,10 @@ public class Board
             return 0;
         } else if (!ats)
         {
-            System.out.println("$:" + dollaNum);
 
             return 1;
         } else if (!dollas)
         {
-            System.out.println("@:" + atNum);
             return 2;
         } else
         {
